@@ -28,8 +28,9 @@ function fetch(url) {
     const [, param] = url.split('=');
     const index = parseInt(param, 10) || 1;
     setTimeout(() => {
-      const response = simulatedResponses[index - 1];
-      resolve(response);
+      // const response = simulatedResponses[index - 1];
+      // resolve(response);
+      reject(new Error('fetched failed'));
     }, 2000);
   });
 }

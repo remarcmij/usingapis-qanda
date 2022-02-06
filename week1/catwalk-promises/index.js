@@ -37,14 +37,10 @@ function catWalk() {
   const centerPos = (window.innerWidth - img.width) / 2;
   const stopPos = window.innerWidth;
 
-  const loop = () => {
-    walk(img, startPos, centerPos)
-      .then(() => dance(img))
-      .then(() => walk(img, centerPos, stopPos))
-      .then(() => loop());
-  };
-
-  loop();
+  walk(img, startPos, centerPos)
+    .then(() => dance(img))
+    .then(() => walk(img, centerPos, stopPos))
+    .then(catwalk);
 }
 
 window.addEventListener('load', catWalk);

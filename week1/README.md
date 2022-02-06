@@ -4,6 +4,8 @@
 
 ## Today's Agenda
 
+(Start recording!)
+
 - How is it going so far?
 - Prep exercise: Cat Walk
 - Event loop experiments
@@ -15,11 +17,11 @@
 
 Advanced Event Loop video: <https://youtu.be/cCOL7MC4Pl0>
 
-## 1. Ali
+## 1. Ali\*
 
 Q1: Should I use multi promises using Promise.all or Promise.race. I can not understand which one should used for ?
 
-## 2. Aykut
+## 2. Aykut\*
 
 Q1: <https://www.codingame.com/playgrounds/347/javascript-promises-mastering-the-asynchronous/its-quiz-time>  
 Can we solve the last quiz question in this link step by step
@@ -35,7 +37,7 @@ A1: As in this link? <https://developers.google.com/youtube/v3/getting-started?h
 
 Q1: Resolve and reject structure reminds me if-else logic. Why do we need resolve-reject instead of if-else. For sure they serve different purposes and logics but need more info and understanding on that.
 
-## 5. Mohammed
+## 5. Mohammed\*
 
 Q1: When to use Promises(.then) and when to use Async Await? Are those the substitutes of each other?
 
@@ -72,7 +74,7 @@ Q1: I noticed the callback and promise give the same results.
 What is the difference between Callback and Promise?
 can explain with an example
 
-## 8. Ensar
+## 8. Ensar\*
 
 Q1: In an async function, it is generally used await inside it. Does it mean that the lines used await keyword runs synchronously inside the async function but the async function itself runs asynchronously between other functions? What if don’t we use await keyword?
 
@@ -189,13 +191,13 @@ promise
 // output: success, Defeat, error, Error Caught, Success: test
 ```
 
-## 10. Onur
+## 10. Onur\*
 
 Q1: What does one-threaded event loop? What's the difference between one-threaded and multi-threaded languages?
 
 What are the pros&cons?
 
-## 11. Ertuğrul
+## 11. Ertuğrul\*
 
 Q1: There are callbacks, promises, async and await. Depending on needs and development on JS, the last point seems async and await. Which one is the best practice do you use in real life projects?
 
