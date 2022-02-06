@@ -1,0 +1,13 @@
+{
+  "name": "usingapis-class35",
+  "version": "1.0.0",
+  "description": "This repo contains the material prepared for the Using APIs Q&A sessions for class 34.",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
