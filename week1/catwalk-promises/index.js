@@ -40,7 +40,7 @@ function catWalk() {
   walk(img, startPos, centerPos)
     .then(() => dance(img))
     .then(() => walk(img, centerPos, stopPos))
-    .then(catwalk);
+    .then(catWalk);
 }
 
 window.addEventListener('load', catWalk);
