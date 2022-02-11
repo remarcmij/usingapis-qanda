@@ -1,4 +1,4 @@
-function sleep(time) {
+function wait(time) {
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve();
@@ -6,4 +6,4 @@ function sleep(time) {
   });
 }
 
-sleep(1000).then(() => console.log('Hi'));
+wait(1000).then(() => console.log('Hi'));

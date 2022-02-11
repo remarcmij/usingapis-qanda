@@ -6,7 +6,7 @@ const DANCE_TIME_MS = 5000;
 const DANCING_CAT_URL =
   'https://media1.tenor.com/images/2de63e950fb254920054f9bd081e8157/tenor.gif';
 
-function sleep(time) {
+function wait(time) {
   return new Promise((resolve) => {
     setTimeout(resolve, time);
   });
@@ -17,14 +17,14 @@ async function walk(img, startPos, stopPos) {
   while (position < stopPos) {
     img.style.left = `${position}px`;
     position += STEP_SIZE_PX;
-    await sleep(STEP_INTERVAL_MS);
+    await wait(STEP_INTERVAL_MS);
   }
 }
 
 async function dance(img) {
   const savedSrc = img.src;
   img.src = DANCING_CAT_URL;
-  await sleep(DANCE_TIME_MS);
+  await wait(DANCE_TIME_MS);
   img.src = savedSrc;
 }
 
