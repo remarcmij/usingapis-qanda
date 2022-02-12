@@ -1,4 +1,4 @@
-const BASE_URL = 'http://palulu:3000';
+const BASE_URL = 'http://raspi4:3000';
 
 async function fetchData(url) {
   const response = await fetch(url);
