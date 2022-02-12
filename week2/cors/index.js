@@ -1,4 +1,4 @@
-const BASE_URL = 'http://192.168.178.4:3000';
+const BASE_URL = 'http://palulu:3000';
 
 async function fetchData(url) {
   const response = await fetch(url);
@@ -8,12 +8,15 @@ async function fetchData(url) {
   return response.json();
 }
 
-function renderData(jsonData) {
+function renderData(students) {
   const root = document.querySelector('#root');
-  const pre = document.createElement('pre');
-  const jsonString = JSON.stringify(jsonData, null, 2);
-  pre.textContent = jsonString;
-  root.appendChild(pre);
+  const ul = document.createElement('ul');
+  root.appendChild(ul);
+  students.forEach((student) => {
+    const li = document.createElement('li');
+    li.textContent = student.name;
+    ul.appendChild(li);
+  });
 }
 
 function renderError(err) {
@@ -25,7 +28,7 @@ function renderError(err) {
 
 async function main() {
   try {
-    const jsonData = await fetchData(BASE_URL + '/modules/4');
+    const jsonData = await fetchData(BASE_URL + '/students');
     renderData(jsonData);
   } catch (err) {
     renderError(err);
