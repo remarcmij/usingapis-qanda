@@ -4,16 +4,19 @@
 
 ## Today's Agenda
 
-- How did the homework (week 1) go?
+(Start recording)
+
+- How was your week (study, homework)?
 - Topics in week 2:
   - async/await
   - try/catch
   - web APIs
   - fetch
   - JSON
-- Prep exercises:
+- Prep exercises student solutions:
   - Catwalk async/await
   - Fetch try/catch
+- Catwalk re-refactored
 - Async/await examples (`async-await.ipynb`)
 - Fetch (`fetch-livecode`)
 - CORS
