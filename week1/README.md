@@ -19,6 +19,8 @@
 
 - Go through questions
 
+- If time left: Cat Walk using callbacks
+
 Advanced Event Loop video: <https://youtu.be/cCOL7MC4Pl0>
 
 ## Questions
@@ -81,6 +83,10 @@ const promise = new Promise((resolve, reject) => {
 
 Can we solve prepExercise of this week?
 
+I wonder different approaches and solutions for it. I solved it in a way that I don't like. I posted the question yesterday.
+
+> _Show us what you came up with._
+
 ### Lynn
 
 I was checking some code online and I saw this:
@@ -115,3 +121,9 @@ why was the output of the finally undefined?`
 ### Radhi
 
 Q: How does JS decide which callback will be synchronous and which - Asynchronous?
+
+### Ali
+
+Q: How can we make promises work with `requestAnimationFrame()` also is there way to create a timeline of events using promises such that it is structured based on time:
+0-1 second mark, navbar sliding down,
+1-2 second mark text is faded in and so on.
