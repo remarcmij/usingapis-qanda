@@ -8,6 +8,10 @@
 
 - How is it going so far?
 - Prep exercise: Cat Walk
+  - What do you think the advantages are of having the constants in the global scope? Are there any disadvantages?
+  - To make the code loop we cannot use a standard JavaScript loop (`for` or `while`). Why is that?
+  - Do you feel this version is easier to read than the version you made in the Browsers module?
+  - Is this version more efficient or not or does it not matter?
 - Event loop experiments
 - Promise experiments
 
