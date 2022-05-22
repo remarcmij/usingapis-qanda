@@ -25,105 +25,39 @@ Advanced Event Loop video: <https://youtu.be/cCOL7MC4Pl0>
 
 ## Questions
 
-### Mo
+### Fadi-Naddaf
 
-Q: why do we add setTimeout() in our promise function ? i found that in many exercises. is it to the function asynchronous? in that case promises in default are synchronous?
+Q1: Is the default of promise method is async?  
+Q2: Can we use Promise for the eventlistener?  
+Like when the user or the client scroll the page it will execute the then method and when scroll again the other then executed.  
+Q3: Is there a difference if we wrote the catch method like this:
+`promise.catch(error => console.log(error.message));`
+Or like this:
+`.catch(error => console.log(error))`  
+Q4: If I have a hundreds of videos and I want them to be loaded by order one after another. What is the best way to do it? because it's not logic to write promise for each video?
 
-```js
-(itemName, distributorName) => {
-  console.log(`Checking availability of ${itemName} at ${distributorName}...`);
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      if (restockSuccess()) {
-        console.log(`${itemName} are in stock at ${distributorName}`);
-        resolve(itemName);
-      } else {
-        reject(
-          `Error: ${itemName} is unavailable from ${distributorName} at this time.`
-        );
-      }
-    }, 1000);
-  });
-};
-```
+### Yasemin
 
-### Edward
+Hello, my question is
+Can we use await instead of promise?
 
-Q: should we directly get used to the ES7 style using async and wait? Most tutorials and documentation does not use ES7 is there any reason for that?
+Here are my GitHub links for the prep exercise. <https://ysmnclsknnl.github.io/catwalk/>. <https://github.com/ysmnclsknnl/catwalk>
 
-### Furkan
+### Clement
 
-Q: We use `Promise.all()` to wait for all promises to be resolved and then return the all values as an array. But in which case we should use `Promise.any()` ? Could you give an example please?
+Hello Q:
+We have promises, async-await and callbacks. Which one is better to implement base on your reference, and why should we use one over, the others? What is the advantage and disadvantage? Thank you.
 
-### Serdar
+### Baraah
 
-Q: Can you give a small example of not _‘blocking the event loop’_ and how to _‘queue up the code’_? Understood the concept but, couldn’t visualize it well in my mind. Where and how to use it?
+Hi,my question is:
+Can we use await only with promises?
 
-### Hüseyin
+### Serva
 
-```js
-const promise = new Promise((resolve, reject) => {
-  reject(Error('Some error occurred'));
-})
-promise.catch(error => console.log(error.message));
-promise.catch(error => console.log(error.message)`);
-```
-
-Q: What is the difference between these codes?
-
-```js
-const promise = new Promise((resolve, reject) => {
-  reject(Error('Some Error Occurred'));
-})
-  .catch((error) => console.log(error))
-  .then((error) => console.log(error));
-```
-
-### Suleyman
-
-Can we solve prepExercise of this week?
-
-I wonder different approaches and solutions for it. I solved it in a way that I don't like. I posted the question yesterday.
-
-> _Show us what you came up with._
-
-### Lynn
-
-I was checking some code online and I saw this:
-
-```js
-const promise = new Promise((res) => res(2));
-promise
-  .then((v) => {
-    console.log(v);
-    return v * 2;
-  })
-  .then((v) => {
-    console.log(v);
-    return v * 2;
-  })
-  .finally((v) => {
-    console.log(v);
-    return v * 2;
-  })
-  .then((v) => {
-    console.log(v);
-  });
-```
-
-and the output was :
-2
-4
-undefined
-8
-why was the output of the finally undefined?`
-
-### Radhi
-
-Q: How does JS decide which callback will be synchronous and which - Asynchronous?
+Are setTimeout and setInterval only functions that we can use for creating async behavior
 
 ### Ali
 
-Q: How can we make promises work with `requestAnimationFrame()` also is there way to create a timeline of events using promises such that it is structured based on time:
-0-1 second mark, navbar sliding down,
-1-2 second mark text is faded in and so on.
+Hello, here is my question:
+What is the difference between microtask queue and callback queue? Why microtask queue has higher priority? Thanks

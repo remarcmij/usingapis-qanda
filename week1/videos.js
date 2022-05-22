@@ -1,4 +1,4 @@
-const videos = [
+const myVideos = [
   'episode1',
   'episode2',
   'episode3',
@@ -7,22 +7,22 @@ const videos = [
   'episode6',
 ];
 
-function watchOne(index) {
+function playVideo(video) {
   return new Promise((resolve) => {
-    console.log(`Watching ${videos[index]}`);
+    console.log(`Playing ${video}`);
     setTimeout(() => {
-      console.log(`Finished ${videos[index]}`);
+      console.log(`Finishing ${video}`);
       resolve();
     }, 2000);
   });
 }
 
-function bingeWatch(index = 0) {
-  watchOne(index).then(() => {
+function bingeWatch(videos, index = 0) {
+  playVideo(videos[index]).then(() => {
     if (index < videos.length - 1) {
-      bingeWatch(index + 1);
+      bingeWatch(videos, index + 1);
     }
   });
 }
 
-bingeWatch();
+bingeWatch(myVideos);
