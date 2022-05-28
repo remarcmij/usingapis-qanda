@@ -7,6 +7,7 @@
 (Start recording)
 
 - How was your week (study, homework)?
+  - Promises: review (ex3, ex4, ex5)
 - Topics in week 2:
   - async/await
   - try/catch
@@ -24,58 +25,62 @@
 
 Break at 13:15
 
+### Promises
+
+#### Definition from Ben Lesh
+
+- Read-only view to a single future value
+- Success and error semantics via .then()
+- Not lazy. By the time you have a promise, it’s on its way to being resolved.
+- Immutable and uncancellable. Your promise will resolve or reject, and once only.
+
 Q&A: see below
 
 ## Questions
 
-### Mo
+### Fadi-Naddaf
 
-Q: why do throw an error call back function after the first success call back, even-though we throw an error inside the success function?
+Q1: Where it will saved the client data in my app?
+for example: when the client signed up, so where his data will be saved to remember him for the next visit and also how I can grabbed his data to add it to his personal page?
+
+Q2: in an app of movies after you select the type of movie you want to watch which is an Action move and there is a search label and when you start typing it start giving you a suggestions.
+for example you type D, it start showing you an array of the a list moves started by D "Die hard, Doctor strange, Dairy of the Dead". So how to do this thing?
+
+See: <https://youtu.be/jiJJ2V8K1ik>
+
+Q3: If I fetching a data from 2 or more different site and the second fetch is finished before the first, so is it will displayed before the first or it will be awaiting for the first to be finished?
+
+Q4: In the example bellow
+A: Why we add 'no-cache' as second argument?
+B: Why we throw an error function even we have an error inside the fetch function?
 
 ```js
-fetch(endpoint, { cache: 'no-cache' })
-  .then(
-    (response) => {
-      if (response.ok) {
-        return response.json();
-      }
-      throw new Error('Request failed!');
-    },
-    (networkError) => {
-      console.log(networkError.message);
+.fetch(endpoint, {cache: 'no-cache'}).then(response => {
+    if (response.ok) {
+      return response.json();
     }
-  )
-  .then((jsonResponse) => {
-    renderResponse(jsonResponse);
-  });
+    throw new Error('request failed!');
+    }, networkError => {
+      console.log(networkError.message)
+    })
 ```
 
-### Ali
+Q5: How to add an EventListener.
+Example: when we registered in some website or an app we can use the mouse to click on the submit button or we can just click Enter in the keyboard.
 
-Q: Do we have to check HTTP response statuses if we already have our `fetch()` in a trycatch block? Wouldn't catching the error be enough? Also if we do have to check the status, how many should we check for? Is it a good idea to just check if we got status 200 and consider anything else as failure to save time?
+Q6: In the example bellow why we store the url in variable?
 
-### Edward
+```js
+function searchShow(query) {
+  const url = `http://api.tvmaze.com/search/show?q=${query}`;
+  fetch(url);
+}
+```
 
-Q: With the try/catch pair, why would we still use ‘throw error’? Since catch allows us to determine what happens when an error occurs within the “try” block, can’t we just log the errors there? or are there any specific uses for having a throw new Error
+can't we write it like this direct?
 
-### Furkan (not present)
-
-Q: After getting a data with fetch operation, will we still connected to api or do we disconnect automatically?
-
-### Lynn
-
-Q1: What are API documentation templates that are commonly used?
-
-Q2: What are the main downsides of using asynchronous methods compared to synchronous methods?
-
-### Suleyman
-
-Q: How much should we focus on XMLHttpRequest? Should we write any request with it or should we write everything with fetch right now? Is just to know what it is enough for this module?
-
-### Serdar
-
-Q: `fetch(endpoint, {cache: 'no-cache'})` Why should we add ‘no-cache’ as second argument? Anything related with how APIs work?
-
-### Radhi (not present)
-
-In an async function, it is generally used await inside it. Does it mean that the lines used await keyword runs synchronously inside the async function but the async function itself runs asynchronously between other functions? What if we don’t use await keyword?
+```js
+function searchShow(query) {
+  fetch(url) = `http://api.tvmaze.com/search/show?q=${query}`;
+}
+```
