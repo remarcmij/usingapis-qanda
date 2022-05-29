@@ -27,7 +27,7 @@ window.addEventListener('load', () => {
   let timeoutToken = null;
 
   const searchFieldElement = document.getElementById('searchField');
-  searchFieldElement.addEventListener('keyup', () => {
+  searchFieldElement.addEventListener('input', () => {
     clearTimeout(timeoutToken);
 
     timeoutToken = setTimeout(async () => {
