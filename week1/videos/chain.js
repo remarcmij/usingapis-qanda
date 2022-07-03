@@ -7,11 +7,11 @@ const myVideos = [
   'episode6',
 ];
 
-function playVideo(videos) {
+function playVideo(video) {
   return new Promise((resolve) => {
-    console.log(`Playing ${videos}`);
+    console.log(`Playing ${video}`);
     setTimeout(() => {
-      console.log(`Finishing ${videos}`);
+      console.log(`Finishing ${video}`);
       resolve();
     }, 1000);
   });
