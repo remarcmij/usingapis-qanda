@@ -1,4 +1,7 @@
 {
   "markdown-preview-github-styles.colorTheme": "light",
-  "cSpell.words": ["pokemons"]
+  "cSpell.words": ["pokemons"],
+  "code-runner.clearPreviousOutput": true,
+  "code-runner.saveFileBeforeRun": true,
+  "code-runner.showExecutionMessage": false
 }

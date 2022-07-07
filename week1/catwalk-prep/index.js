@@ -30,18 +30,13 @@ function dance(img, cb) {
 function catWalk() {
   const img = document.querySelector('img');
   const startPos = -img.width;
-  0;
   const centerPos = (window.innerWidth - img.width) / 2;
   const stopPos = window.innerWidth;
 
-  // prettier-ignore
-  walk(img, startPos, centerPos, 
-    () => {
-      dance(img, () => {
-        walk(img, centerPos, stopPos, 
-    () => catWalk());
-    });
-  });
+  // callback hell
+  walk(img, startPos, centerPos, () =>
+    dance(img, () => walk(img, centerPos, stopPos, () => catWalk()))
+  );
 }
 
 window.addEventListener('load', catWalk);
