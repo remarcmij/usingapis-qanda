@@ -1,38 +1,19 @@
-const BASE_URL = 'http://raspi4:3000';
+const BASE_URL = 'http://raspi4:5000';
 
-async function fetchData(url) {
-  const response = await fetch(url);
-  if (!response.ok) {
-    throw new Error(`HTTP Error ${response.status} - ${response.statusText}`);
-  }
-  return response.json();
+function fetchData(url) {
+  // TODO
 }
 
 function renderData(students) {
-  const root = document.querySelector('#root');
-  const ul = document.createElement('ul');
-  root.appendChild(ul);
-  students.forEach((student) => {
-    const li = document.createElement('li');
-    li.textContent = student.name;
-    ul.appendChild(li);
-  });
+  // TODO
 }
 
 function renderError(err) {
-  const root = document.querySelector('#root');
-  const h1 = document.createElement('h1');
-  h1.textContent = err.message;
-  root.appendChild(h1);
+  // TODO
 }
 
 async function main() {
-  try {
-    const jsonData = await fetchData(BASE_URL + '/students');
-    renderData(jsonData);
-  } catch (err) {
-    renderError(err);
-  }
+  // TODO
 }
 
 window.addEventListener('load', main);
