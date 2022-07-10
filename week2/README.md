@@ -14,8 +14,11 @@
   - web APIs
   - fetch
   - JSON
-  - Revisit Promise.all, .race etc
+
+- Revisit homework week 1
+
   - Promises: review (ex3, ex4, ex5)
+  - Revisit Promise.all, .race etc
 
 - Prep exercises student solutions:
   - Catwalk async/await
@@ -77,18 +80,24 @@ Questions:
 ```js
 async function getData(url) {
   try {
-    const data = await fetch(url);
-    const jsonData = data.json;
+    const response = await fetch(url);
+    const jsonData = await response.json();
     return jsonData;
   } catch (error) {
     console.log(error.message);
+    throw error;
   }
 }
 // Piece of code..
 
 async function main() {
-  const myData = await getData(url);
-  console.log(myData);
+  try {
+    const myData = await getData(url);
+    console.log(myData);
+    renderData(myData); // myData: undefined
+  } catch (err) {
+    renderError(err);
+  }
 }
 ```
 

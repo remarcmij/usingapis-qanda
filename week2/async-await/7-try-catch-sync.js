@@ -2,14 +2,15 @@
 //
 // Errors that occur inside a `try` block can be caught in a `catch` block.
 //
-function foo() {
+async function foo() {
   const a = 1;
+  console.log(`a = ${a}`);
   a = 2;
 }
 
-function bar() {
+async function bar() {
   try {
-    const result = foo();
+    const result = await foo();
     console.log(result);
   } catch (err) {
     console.log(`Oops: ${err.message}`);
