@@ -7,9 +7,13 @@ function fireBullet() {
       console.log('distance', distance);
       if (distance === 10) {
         resolve('>>> Bullet hit target');
+        // 1. Comment out `return` to simulate bullet hitting a paper target.
+        // 2. Uncomment `return` to simulate bullet hitting a brick wall.
         return;
       }
-      setTimeout(fly, 200);
+      if (distance < 40) {
+        setTimeout(fly, 200);
+      }
     };
 
     fly();
