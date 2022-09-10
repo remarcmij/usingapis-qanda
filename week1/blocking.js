@@ -1,40 +1,33 @@
-let startTime;
+import logTime from './helpers/logTime.js';
 
-function timeoutNonBlocking(time, callback) {
-  setTimeout(() => callback(), time);
-}
-
-function timeoutBlocking(time, callback) {
-  const startTime = Date.now();
-  while (Date.now() < startTime + time) {
-    // do nothing, just loop like mad
+function setTimeoutSync(callbackFn, time) {
+  const endTime = Date.now() + time;
+  while (Date.now() < endTime) {
+    // do nothing, just loop until time has passed
   }
-  callback();
+  callbackFn();
 }
 
-function doAsyncThings() {
-  let count = 20;
-  const intervalId = setInterval(() => {
-    console.log(Date.now() - startTime, 'Doing async things...');
-    count -= 1;
-    if (count === 0) {
-      clearInterval(intervalId);
-    }
+const setTimeoutFn = setTimeout;
+// const setTimeoutFn = setTimeoutSync;
+
+function doTasks(count) {
+  if (count <= 0) {
+    return;
+  }
+
+  setTimeoutFn(() => {
+    logTime(`doing task: ${count}`);
+    doTasks(count - 1);
   }, 100);
 }
 
 function main() {
-  startTime = Date.now();
+  logTime('main() start');
 
-  console.log(Date.now() - startTime, 'Main start');
+  doTasks(20);
 
-  doAsyncThings();
-
-  timeoutBlocking(1000, () =>
-    console.log(Date.now() - startTime, 'Hello world!')
-  );
-
-  console.log(Date.now() - startTime, 'Main exit');
+  logTime('main() exit');
 }
 
 main();
