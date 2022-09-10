@@ -25,69 +25,12 @@ Advanced Event Loop video: <https://youtu.be/cCOL7MC4Pl0>
 
 ## Questions
 
-### İbrahim AKANÇAY
+### Nida Ul Zafar
 
-Can we watch event loop, callstack of our codes in browser devtools? if yes how? Can you show with an example?
+My first question is regarding `$.get()` and `new Promise()`. In the video tutorial the tutor used `new XMLHttpRequest()`; inside the `new Promise()` and later showed `$.get()` way of writing promise. Are they same or is there any difference between the two? what should we choose as a junior developer?
 
-### Akın Tanış
+For video reference please click here.
 
-Q: Are there any side effects of using observables instead of promises? Which one is recommended?
+`$.get()` method starts at 10:25
 
-### Mones Hamd
-
-as a web developer , before build a web app ,should i consider using promises as much as possible , as we made in prep exercise ??
-
-### Ghufran Thabit
-
-Hello, although I understand the event loop I'm still confused and couldn't understand the answers to these questions. <https://www.codingame.com/playgrounds/347/javascript-promises-mastering-the-asynchronous/its-quiz-time>
-Thank you in advance!
-
-### Baraah Ranneh
-
-My question is: How Do I Cancel a Promise?
-
-### Sezgin
-
-What is the Web API , is it part of browser , what is the main functionality of it in developing web application ?
-
-### Beyza
-
-To avoid callback hell we are using promises. However there can be too much .then, promise hell. How can escape promise hell? Thank you.
-
-### cynthia susana
-
-What is the difference between promise .all() and promise.race() and in which cases we use them ?
-
-### Amer Barnawi
-
-Question:
-If I want to use ( Promise ) and after that ( then method ) and ( catch ) ;
-Which is useful more? and which one is more used and why?
-Using the ( Chain ) or ( without chaining ).
-For example :
-Chain:
-
-```js
-piece of code.
-const myPromise = new Promise( (resolve, reject) => { } ).then();
-piece of code.
-```
-
-```js
-piece of code.
-const myPromise = new Promise( (resolve, reject) => { } );
-(*) piece of code.
-myPromise.then();
-piece of code.
-```
-
-Without chaining:
-Do I need the code (\*) in some cases before using the ( then ) method?
-
-### Abdullah S
-
-In which conditions do I need to use promise. race?
-
-### Ashraf Alshashaa
-
-Q: Is async-await better than normal promises?
+my second question is about generators in asynchronous javascript. Is it important for a junior developer to program using generators as it seems quite complicated?
