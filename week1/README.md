@@ -108,3 +108,21 @@ const myPromise = () => {
   });
 };
 ```
+
+### Aleksei Kuznetsov
+
+Is there are any alternatives to XMLHttpRequest to get data without reloading the page?
+
+#### Answer
+
+- `XMLHttpRequest` introduced in IE5 (1999) to enable AJAX calls
+- `fetch` supported as of Chrome 42 (2015) but not in IE
+- `axios` library uses `XMLHttpRequest` internally
+
+### Elif Nur Kalkan
+
+Hello, Aren’t these two pieces of code the same? Why is null used?
+
+`promise.then(resultHandler).catch(errorHandler)`
+
+`promise.then(resultHandler).then(null,errorHandler)`

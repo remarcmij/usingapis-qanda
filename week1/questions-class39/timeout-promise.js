@@ -5,5 +5,10 @@ function timeoutPromise(time) {
   });
 }
 
+console.time('elapsed');
 console.log('start');
-timeoutPromise(1000).then(() => console.log('stop'));
+
+timeoutPromise(1000).then(() => {
+  console.log('stop');
+  console.timeEnd('elapsed');
+});
