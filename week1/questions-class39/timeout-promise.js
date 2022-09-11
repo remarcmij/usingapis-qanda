@@ -1,14 +1,18 @@
 // Convert callback-based setTimeout to promise-based version
-function timeoutPromise(time) {
+function sleep(time) {
   return new Promise((resolve) => {
     setTimeout(resolve, time);
   });
 }
 
-console.time('elapsed');
-console.log('start');
+async function main() {
+  console.time('elapsed');
+  console.log('start');
 
-timeoutPromise(1000).then(() => {
+  await sleep(1000);
+
   console.log('stop');
   console.timeEnd('elapsed');
-});
+}
+
+main();
