@@ -146,3 +146,7 @@ Hi,
 - Exept setTimeout, is an asynchronous operation only provided by requesting data from somewhere else ?
 - What is the difference between (export / import) and (module.exports / require)? and does import or require work as $ get() ?
   (edited)
+
+### Asiye Gokalp
+
+Hello, How can we stop a setInterval in a promise?
