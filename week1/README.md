@@ -126,3 +126,23 @@ Hello, Aren’t these two pieces of code the same? Why is null used?
 `promise.then(resultHandler).catch(errorHandler)`
 
 `promise.then(resultHandler).then(null,errorHandler)`
+
+### Vladimir Seredinin
+
+Hello,
+
+- My question is: what is the difference between synchronous and asynchronous callback function?
+- And what is the difference in the work of JSON queries in different browser
+
+### Nuha Azazi
+
+Hi, My question :
+Why do we use Promise.all?
+
+### Wael AbuRayya
+
+Hi,
+
+- Exept setTimeout, is an asynchronous operation only provided by requesting data from somewhere else ?
+- What is the difference between (export / import) and (module.exports / require)? and does import or require work as $ get() ?
+  (edited)
