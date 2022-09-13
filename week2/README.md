@@ -24,7 +24,7 @@
   - Catwalk async/await
   - Fetch try/catch
 - Catwalk re-refactored
-- Async/await examples (`async-await.ipynb`)
+- Async/await examples
 - Fetch/CORS (live-code)
 - JSON (`json.ipynb`)
 

@@ -1,5 +1,5 @@
-// ! Asynchronous function:
-// * A function marked with the `async` keyword.
+//! Asynchronous function:
+//  * A function marked with the `async` keyword.
 
 async function foo() {
   return 42;

@@ -1,5 +1,4 @@
-// A rejected promise can be caught in a `try/catch` block when using
-// `async/await`.
+//! A rejected promise can be caught with `try/catch` when using `async/await`.
 
 function foo() {
   return new Promise(() => {

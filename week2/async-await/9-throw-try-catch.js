@@ -1,10 +1,10 @@
-// A thrown error (either in the promise constructor function itself
-// or in a function that is calls) causes the promise to be rejected.
-// `async/await`.
-//
+//! A thrown error (either in the promise constructor function itself
+//! or in a function that is calls) causes the promise to be rejected.
+//! `async/await`.
+
 function baz() {
   const a = 1;
-  a = 2;
+  a = 2; // WTF?
 }
 
 function foo() {

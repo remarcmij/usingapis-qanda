@@ -1,4 +1,4 @@
-// ! Regular (synchronous) function
+//! Regular (synchronous) function
 
 function foo() {
   return 42;
