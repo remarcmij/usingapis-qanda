@@ -35,3 +35,8 @@ function main() {
 }
 
 main();
+
+/* 
+  ! For a better way using `fetch` and `AbortController` see:
+  ! https://javascript.info/fetch-abort
+*/
