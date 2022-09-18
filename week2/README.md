@@ -80,6 +80,43 @@ How to render an image which we got from the server side at a client side?
 
 kindly can you give use more explanation a bout catch and handling the error
 
+### Hikmet DAG
+
+Hi,I do not get this exercise, can you explain the output AUB?
+
+```js
+async function async1() {
+  console.log(1);
+  await async2();
+  console.log(2);
+}
+
+async function async2() {
+  console.log(3);
+}
+
+console.log(4);
+
+setTimeout(function () {
+  console.log(5);
+}, 0);
+
+async1();
+
+new Promise(function (resolve) {
+  console.log(6);
+  resolve();
+}).then(function () {
+  console.log(7);
+});
+
+console.log(8);
+```
+
+### Mohanad AL Hasan
+
+Hi, Should I learn "XMLHttpRequest" or is it no longer used compared to "fetch"?
+
 ### Wael AbuRayya
 
 Hello,
