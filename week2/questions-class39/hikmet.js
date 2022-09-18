@@ -24,3 +24,18 @@ new Promise(function (resolve) {
 });
 
 console.log(8);
+
+/*
+--- sync code: immediate execution
+4
+1
+3
+6
+8
+--- microtask 1: await from line 2
+2
+--- microtask 2: .then() from 23
+7
+--- macrotask: timeout from line 14
+5
+*/
