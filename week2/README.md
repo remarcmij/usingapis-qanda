@@ -31,12 +31,14 @@
 
 Break at 13:15
 
+- Go through questions
+
 ### Promises
 
 #### Definition from Ben Lesh
 
 - Read-only view to a single future value
-- Success and error semantics via .then()
+- Success and error semantics via `.then()`
 - Not lazy. By the time you have a promise, it’s on its way to being resolved.
 - Immutable and uncancellable. Your promise will resolve or reject, and once only.
 

@@ -1,7 +1,10 @@
 {
   "markdown-preview-github-styles.colorTheme": "light",
-  "cSpell.words": ["Milli", "Millisecs", "pokemons"],
+  "cSpell.words": ["endregion", "Milli", "Millisecs", "pokemons"],
   "code-runner.clearPreviousOutput": true,
   "code-runner.saveFileBeforeRun": true,
-  "code-runner.showExecutionMessage": false
+  "code-runner.showExecutionMessage": false,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": false
+  }
 }

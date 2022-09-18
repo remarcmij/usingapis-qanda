@@ -12,7 +12,7 @@ async function bar() {
     const result = await foo();
     console.log(result);
   } catch (err) {
-    console.log(`Oops: ${err.message}`);
+    console.error(`Oops: ${err.message}`);
   }
 }
 

@@ -1,19 +1,24 @@
 //! A rejected promise can be caught with `try/catch` when using `async/await`.
 
 function foo() {
-  return new Promise(() => {
-    throw new Error('Oops, something went wrong...');
+  return new Promise((resolve, reject) => {
+    // resolve(42);
+    reject(new Error('Oops, something went wrong...'));
+    // throw new Error('Oops, something went wrong...');
   });
+}
+
+async function baz() {
+  return 42;
+  // throw new Error('Oops, something went wrong...');
 }
 
 async function bar() {
   try {
-    console.log('try block');
     const result = await foo();
-    console.log(result);
+    console.log('try', result);
   } catch (err) {
-    console.log('catch block');
-    console.log(`Error: ${err.message}`);
+    console.error('catch', `Error: ${err.message}`);
   }
 }
 
