@@ -18,8 +18,8 @@ async function bar() {
 
 bar();
 
-// #region Note
-// Note: use try/catch only to catch anticipated errors.
-// A runtime error is not one of those. Better to let the app crash
-// with a stack trace so that you can fix the error.
+// #region Key learnings
+//  1. Use try/catch only to catch anticipated errors.
+//     A runtime error is not one of those. Better to let the app crash
+//     with a stack trace so that you can fix the error.
 // #endregion

@@ -11,3 +11,10 @@ async function bar() {
 }
 
 bar();
+
+// #region Key learnings
+//  1. If an error is thrown JavaScript walks up the call chain to find
+//     a function that has a try/catch block.
+//  2. If no try/catch block is found JavaScript will terminate the current
+//     code execution and report an "unhandled error".
+// #endregion

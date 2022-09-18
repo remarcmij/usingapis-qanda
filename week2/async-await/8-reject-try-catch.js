@@ -23,3 +23,8 @@ async function bar() {
 }
 
 void bar();
+
+// #region Key learnings
+//  1. You can either reject a promise by calling `reject()` or, alternatively,
+//     by throwing an error.
+// #endregion
