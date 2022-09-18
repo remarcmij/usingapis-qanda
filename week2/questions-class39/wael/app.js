@@ -9,7 +9,7 @@ async function fetchData(url) {
 
 function main() {
   fetchData(
-    'https://api.openweathermap.org/data/2.5/weatherx?lat=44.34&lon=10.99&appid=e4f76d8324c52e04224f07a8daf47741'
+    'https://api.openweathermap.org/data/2.5/weatherx?lat=44.34&lon=10.99&appid=<your API key>'
   )
     .then((parsedData) => {
       console.log('parsedData', parsedData);
