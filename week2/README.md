@@ -4,7 +4,7 @@
 
 ## Today's Agenda
 
-(Start recording)
+(Start recording, cameras ON)
 
 - How was your week (study, homework)?
 - Topics in week 2:

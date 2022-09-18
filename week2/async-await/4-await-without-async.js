@@ -6,7 +6,7 @@ async function foo() {
   return 42;
 }
 
-function bar() {
+async function bar() {
   const result = await foo();
   console.log(result);
 }

@@ -5,11 +5,14 @@
 function baz() {
   const a = 1;
   a = 2; // WTF?
+  console.log('hello');
+  return 42;
 }
 
 function foo() {
   return new Promise((resolve, reject) => {
-    baz();
+    const result = baz();
+    resolve(result);
   });
 }
 
