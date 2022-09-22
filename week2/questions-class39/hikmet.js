@@ -32,7 +32,7 @@ console.log(8);
 3
 6
 8
---- microtask 1: await from line 2
+--- microtask 1: await from line 3
 2
 --- microtask 2: .then() from 23
 7
