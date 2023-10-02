@@ -33,8 +33,11 @@ function catWalk() {
   const dancePos = (window.innerWidth - img.width) / 2;
   const stopPos = window.innerWidth;
 
-  walk(img, startPos, dancePos, () =>
-    dance(img, () => walk(img, dancePos, stopPos, catWalk))
+  // prettier-ignore
+  walk(img, startPos, dancePos, 
+    () => dance(img, 
+      () => walk(img, dancePos, stopPos, 
+        () => catWalk()))
   );
 }
 
