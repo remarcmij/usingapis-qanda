@@ -1,4 +1,5 @@
 //! What will be printed to the console and in what order
+'use strict';
 
 function writeToConsole(message) {
   console.log(message);
@@ -6,20 +7,22 @@ function writeToConsole(message) {
 
 writeToConsole('starting');
 
-setTimeout(function timeout_1() {
+setTimeout(function timeout_1_cb() {
   writeToConsole('timeout 1');
-}, 0);
+}, 1000);
 
-setTimeout(function timeout_2() {
+setTimeout(function timeout_2_cb() {
   writeToConsole('timeout 2');
-}, 0);
+}, 2000);
 
-Promise.resolve() // try reject() too
-  .then(function then_1() {
-    writeToConsole('then 1');
-  })
-  .then(function then_2() {
-    writeToConsole('then 2');
-  });
+const p = new Promise((resolve, reject) => {
+  resolve();
+});
+
+p.then(function then_1_cb() {
+  writeToConsole('then 1');
+}).then(function then_2_cb() {
+  writeToConsole('then 2');
+});
 
 writeToConsole('ending');
