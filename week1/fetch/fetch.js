@@ -2,6 +2,7 @@ const simulatedResponses = [
   {
     page: 1,
     names: [
+      'Christina',
       'Enes',
       'Kadir',
       'Kumait',
@@ -9,6 +10,7 @@ const simulatedResponses = [
       'Lenin',
       'Liz',
       'Marly',
+      'Milad',
       'Mohammed',
       'Rama',
       'Saleh',

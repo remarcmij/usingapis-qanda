@@ -11,6 +11,7 @@
 
   - async/await
   - try/catch
+    - where in call chain to catch errors (ultimate destination)
   - web APIs
   - fetch
   - JSON

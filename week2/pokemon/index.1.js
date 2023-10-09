@@ -25,17 +25,21 @@ function renderError(err) {
 }
 
 function main() {
+  console.log('main entry');
   const button = document.querySelector('#button');
   try {
+    console.log('try entry');
     button.addEventListener('click', async () => {
       const option = document.querySelector('#option');
       const url = option.checked ? INVALID_URL : VALID_URL;
       const pokemons = await fetchJSON(url);
       renderResults(pokemons);
     });
+    console.log('try exit');
   } catch (err) {
     renderError(err);
   }
+  console.log('main exit');
 }
 
 window.addEventListener('load', main);

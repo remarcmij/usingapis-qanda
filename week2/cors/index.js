@@ -1,4 +1,5 @@
-const BASE_URL = 'http://raspi4:5000';
+const API_CORS_ENABLED = 'https://api.github.com';
+const API_CORS_DISABLED = 'https:/google.com';
 
 async function fetchData(url) {
   const response = await fetch(url);
@@ -8,15 +9,11 @@ async function fetchData(url) {
   return response.json();
 }
 
-function renderData(students) {
+function renderData(jsonData) {
   const root = document.querySelector('#root');
-  const ul = document.createElement('ul');
-  root.appendChild(ul);
-  students.forEach((student) => {
-    const li = document.createElement('li');
-    li.textContent = student.name;
-    ul.appendChild(li);
-  });
+  const pre = document.createElement('pre');
+  root.appendChild(pre);
+  pre.textContent = JSON.stringify(jsonData, null, 2);
 }
 
 function renderError(err) {
@@ -28,7 +25,7 @@ function renderError(err) {
 
 async function main() {
   try {
-    const jsonData = await fetchData(BASE_URL + '/students');
+    const jsonData = await fetchData(API_CORS_ENABLED);
     renderData(jsonData);
   } catch (err) {
     renderError(err);
