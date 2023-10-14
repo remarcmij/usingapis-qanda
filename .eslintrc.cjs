@@ -12,5 +12,6 @@ module.exports = {
   rules: {
     'prefer-const': 'warn',
     'no-inner-declarations': 'off',
+    'no-constant-condition': 'off',
   },
 };
