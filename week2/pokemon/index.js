@@ -1,5 +1,4 @@
 'use strict';
-'use strict';
 /*------------------------------------------------------------------------------
  * In this exercise you will practice fetching data from a web API, using
  * `fetch`, promises, async/await and try/catch.
