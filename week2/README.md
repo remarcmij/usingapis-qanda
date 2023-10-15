@@ -16,14 +16,14 @@
   - fetch
   - JSON
 
+- Async/await experiments
+
 - Prep exercises student solutions:
   - Catwalk async/await
   - Fetch try/catch
-- Async/await experiments
 - Error handling in Web Apps
-- Fetch/CORS experiment
 - JSON experiments
-- "Cancel promise"
+- Fetch/CORS experiment
 
 - Go through questions
 
