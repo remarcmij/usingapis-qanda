@@ -39,107 +39,40 @@ Advanced Event Loop video: <https://youtu.be/cCOL7MC4Pl0>
 
 ## Questions
 
-### Kumait Mustafa
+### Tenzin Kunchok
 
-_Couldn’t we quite often use async/await where Promises would be used?_
+1. _What is Micro task and macro task. why there are two different thing._
+2. _is that something like css specificity?_
 
-`async/await` is a newer alternative for the `.then()/.catch()` Promise methods. The promises are still there.
+### Erhan
 
-### Rama
+_If Javascript is a single-threaded language and it runs only one code in a line of time manner, then who runs the async functions or callbacks?_
 
-_How can I optimize the performance of the dancing cat animation to ensure smooth transitions between walking, dancing, and walking again, especially on devices with lower processing power or slower network connections?_
+### Mariam Hammad
 
-There is nothing that promises can do to help optimize the graphic performance. In this particular prep exercise animated GIFs are used. The programmer has no control over the internal GIF animation. You can only control, as you did, how the GIF as a whole move from left to right.
+_Can I use promises always instead of callbacks?_  
+_Could you please show us some examples of converting normal codes to Promises?_  
+_How can we know which data is working on the Stack and which on the Heap, and how can we prevent memory leaks?_
 
-I see no obvious solutions for how to ensure smooth transitions on slower devices, but you may want to check this out:
+### Wajahat Ahmed
 
-- https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame
+_Can you quickly explain Callback Hell and suggest alternate ways to avoid it?_
 
-### Lena
+### Burhan Elaldi
 
-1. _In what situations would you recommend using promises, and when would you prefer using callbacks?_
+_As we read in the promises section, promises are kinda second version of callbacks. Then why we need to use callbacks instead of using promises all the time?_
 
-   We need to make a distinction between synchronous callbacks and asynchronous callbacks. Synchronous callbacks are functions passed as parameters to [higher order functions](https://www.freecodecamp.org/news/higher-order-functions-in-javascript-explained/) and called within the latter as part of their regular (synchronous) execution. No asynchronous event is involved and therefore promises are not needed nor in fact possible. Examples of synchronous callbacks are the functions that you pass to array manipultion methods, such a `.map()` and `.filter()`.
+### Ali Othman
 
-   Asynchronous callbacks were the only possibility to handle asynchrous events before promises became available in JavaScript (see the [Promise evolution](#promise-evolution) section above). Older JavaScript code and libraries often still use asynchronous callbacks. For new code I would recommend to use promises wherever possible. Sometimes you can also create a "promised" version of code that still uses a callback. See for example the `timeoutPromise.js` file in the `week1` folder.
+1. _Could you please explain the use of the "finally method" and how it can be beneficial in certain scenarios?_
+2. _Can chaining promises lead to "callback hell"?_
+3. _Could you provide an example to understand "microtasks"?_
+4. _Can you explain "Promise constructor antipattern" with an example?_
 
-2. _I understand that promises offer better error handling with the catch block. Could you explain how this error handling mechanism works in more detail?_
+### Ahmad Jasem
 
-   When an error is thrown (or a promise is rejected) somewhere in a promise chain the JavaScript engine will call the first `onError` handler it can find down the chain. This can be in the form of a `.catch()` method of a `.then()` method that has an `onError` handler as its second parameter.
+_Can you explain chaining with more complex example ?_
 
-   Remember that each `.then()` and `.catch()` method returns a new promise. If you don't return something explicitly it will a return a promise that is fulfilled with the value `undefined`.
+### Fressia
 
-### Mohammed
-
-_I noticed that errors in promises can be handled using two different approaches:_
-
-`.then(onSuccess, onError)`  
-_or_  
-`.then(onSuccess).catch(onError)`
-
-- _What are the main factors or considerations that would influence our choice between using one over the other?_
-
-- _Or Is it only influenced by the structure of the incoming data or/and the functions being executed?_
-
-`.catch(onError)` is just a syntactic sweeter version of `.then(null, onError)` i.e., a `.then()` method without an `onSuccess` handler (as indicated by passing `null` as the first parameter instead of a handler function ) and only an `onError` handler passed as the second parameter.
-
-I personally prefer separate `.then()` and `.catch()` methods as in my view it makes the code more readable.
-
-### Sanaz Zi
-
-_Could you describe a situation where you might prefer using promise chaining (`.then()`) over `async/await`, and vice versa?_
-
-If you work on existing (perhaps older) code that uses `.then()` throughout it would be wise to maintain the same style. When you are writing new code `async/await` is preferred (but when working on a team project all team member must agree on a common approach).
-
-### Lenin Del Río
-
-_It seems that promises are better than callbacks... In what scenarios would it be considered best practice to use callbacks?_
-
-See my answer on Lena's question.
-
-### Liz García
-
-- _Are there scenarios where callbacks are still a preferred choice over Promises in modern JavaScript development?_
-
-  See my answer on Lena's question.
-
-- _Could you please clarify the concept of APIs and How do callbacks and promises relate to APIs? I am still a bit unclear about this topic._
-
-  When you request data from a Web API you will be making asynchronous network requests, e.g. by using the `fetch()` function provided by the host API of the browser (in the EventLoop PDF `fetch` would be located in the same Host API box as the timers). `fetch()` (covered in week 2) returns a promise that is fulfilled when the network request is succesfully completed (or rejected in case of network errors).
-
-### Marley
-
-- _In a situation where you encounter “callback hell,” how would you refactor the code to make it more manageable?_
-
-  Make each callback a separate, named function and pass that function as the last parameter to the asynchronous function. This method is called [Continuation Passing Style](https://bessiambre.medium.com/continuation-passing-style-patterns-for-javascript-5528449d3070). See the `catwalk-callbacks` folder for an example.
-
-  Do not 'inline' callback code as was done in the `catwalk-hell` example folder. This makes the code very hard to understand.
-
-- _In the context of career training for web development, how important is a deep understanding of asynchronous programming concepts, and what benefits does it offer for professional growth?_
-
-  You will be using asynchronous code all over the place. There is no escaping it.
-
-### zehra kocairi
-
-_I couldn’t really get the idea behind `finally`. I understand how it works but I couldn’t understand where we can use it._
-
-You can use `.finally()` at the end of a promise chainto clean up resources irrespective of whether the promise is fulfilled or rejected. Think of resources such as interval timers, open database connections, open files etc. See the `finally.js` file for an example.
-
-### Kadir Bozkurt
-
-_When I research the promises on the web, I always encounter of using them on getting data from a server or database. Are there any other different use cases in real life as a developer? For example we used in catwalk exercise but we already did it without promise previous week. Is the promise the better way to make this exercise and why?_
-
-The use of promises in the catwalk exercise is of course a bit artificial but nevertheless makes the code easier to understand as just a repeated sequence of events. You should always strive to make your code easy to understand, for the benefit of yourself looking back at your code some time in the future or for that of your team mates that must maintain your code as you move on the other projects.
-
-### Saleh
-
-_What is your comments on chaining, I have noticed that we can chain several asynchronous operations but we will end up in the same scenario as "callback hell"._
-
-For an exaggerated example compare `catwalk-hell` with `catwalk-prep`.
-
-### Enes
-
-- _i often see people use `await fetch`, when i hover over fetch i see a promise part. what is the connection between them ?_
-- _when we use `fetch` , daes it make promise itself ?_
-
-`fetch()` returns a promise. No need to create one yourself.
+_When using Promise.race, how does this affect the flow of asynchronous operations? Could you please explain with an example?_
