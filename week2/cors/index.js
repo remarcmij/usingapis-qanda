@@ -1,5 +1,5 @@
-const API_CORS_ENABLED = 'https://api.github.com';
-const API_CORS_DISABLED = 'https:/google.com';
+const NOBEL_PRIZE_API =
+  'http://api.nobelprize.org/2.1/laureates?limit=10&sort=asc';
 
 async function fetchData(url) {
   const response = await fetch(url);
@@ -25,7 +25,7 @@ function renderError(err) {
 
 async function main() {
   try {
-    const jsonData = await fetchData(API_CORS_ENABLED);
+    const jsonData = await fetchData(NOBEL_PRIZE_API);
     renderData(jsonData);
   } catch (err) {
     renderError(err);

@@ -4,11 +4,15 @@
  ******************************************************************************/
 import fetch from './fetch.js';
 
+function antiFetch(url) {
+  return fetch(url);
+}
+
 function main() {
-  fetch('https://hello.com')
+  antiFetch('https://hello.com')
     .then((response) => {
       console.log('response =', response);
-      return fetch(response.nextUrl);
+      return antiFetch(response.nextUrl);
     })
     .then((response) => {
       console.log('response =', response);

@@ -19,7 +19,7 @@ Promise.reject()
     console.log('catch 1');
   })
   .finally(() => {
-    console.log('finally');
+    console.log('clearing timer');
     clearInterval(timer);
   });
 
