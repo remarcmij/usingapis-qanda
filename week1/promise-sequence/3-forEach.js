@@ -1,5 +1,4 @@
-import myVideos from './myVideos.js';
-import playVideo from './playVideo.js';
+import { playlist, playVideo } from './common.js';
 
 function bingeWatch(videos) {
   let promise = Promise.resolve();
@@ -9,4 +8,4 @@ function bingeWatch(videos) {
   return promise;
 }
 
-bingeWatch(myVideos);
+bingeWatch(playlist);

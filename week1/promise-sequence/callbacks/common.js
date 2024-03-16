@@ -1,4 +1,4 @@
-const playlist = [
+export const playlist = [
   {
     episode: 1,
     title: 'Openings',
@@ -43,25 +43,13 @@ const playlist = [
   },
 ];
 
-function playVideo({ episode, title, synopsis }) {
+export function playVideo({ episode, title, synopsis }, cb) {
   return new Promise((resolve) => {
     console.log(`\nPlaying episode ${episode}: ${title}`);
     console.log(synopsis);
     setTimeout(() => {
       console.log(`Finished episode ${episode}`);
-      resolve();
+      cb();
     }, 1000);
   });
 }
-
-function bingeWatch(videos) {
-  playVideo(videos[0])
-    .then(() => playVideo(videos[1]))
-    .then(() => playVideo(videos[2]))
-    .then(() => playVideo(videos[3]))
-    .then(() => playVideo(videos[4]))
-    .then(() => playVideo(videos[5]))
-    .then(() => playVideo(videos[6]));
-}
-
-bingeWatch(playlist);

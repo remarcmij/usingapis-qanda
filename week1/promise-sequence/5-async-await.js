@@ -1,5 +1,4 @@
-import myVideos from './myVideos.js';
-import playVideo from './playVideo.js';
+import { playlist, playVideo } from './common.js';
 
 async function bingeWatch(videos) {
   for (const video of videos) {
@@ -7,4 +6,4 @@ async function bingeWatch(videos) {
   }
 }
 
-bingeWatch(myVideos);
+bingeWatch(playlist);
