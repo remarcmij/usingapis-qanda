@@ -3,7 +3,7 @@ import logTime from './helpers/logTime.js';
 function setTimeoutSync(callbackFn, time) {
   const endTime = Date.now() + time;
   while (Date.now() < endTime) {
-    console.log('looping...');
+    // console.log('looping...');
     // do nothing, just loop until time has passed
   }
   callbackFn();

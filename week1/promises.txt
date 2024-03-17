@@ -1,0 +1,65 @@
+rasha
+
+starting
+then 1
+then 2
+finally
+ending
+
+ahmet
+
+starting
+ending
+then 1
+then 3
+finally
+timeout 1
+timeout 2
+
+mohammed
+
+starting
+ending
+then 1
+then 2
+then 3
+finally
+timeout 1
+timeout 2
+--------
+
+haile
+
+starting
+ending
+catch 1
+catch 2
+finally
+timeout 1
+timeout 2
+
+lydia
+
+starting
+ending
+catch 1
+catch 2
+timeout 1
+timeout 2
+
+bereket
+
+starting
+ending
+catch 1
+catch 2
+finally
+timeout 1
+timeout 2
+
+1 starting
+6 ending
+4 then
+5 then
+2 timeout
+3 timeout

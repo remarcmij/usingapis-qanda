@@ -56,7 +56,7 @@ Sometimes we are not really interested in what a promise resolved to (i.e., its 
 
 2. _What are some techniques for debugging and testing asynchronous code in JavaScript applications?_
 
-   - Debugging: use breakpoints
+   - Debugging: console.log, use breakpoints
    - Testing: testing libraries such as `jest`
 
 3. _Is the event loop exclusive to browsers?_

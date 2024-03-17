@@ -1,0 +1,26 @@
+async
+
+0 ms: main() start
+3 ms: main() exit
+105 ms: doing task: 20
+206 ms: doing task: 19
+307 ms: doing task: 18
+409 ms: doing task: 17
+509 ms: doing task: 16
+610 ms: doing task: 15
+711 ms: doing task: 14
+811 ms: doing task: 13
+913 ms: doing task: 12
+1001 ms: real timeout
+1014 ms: doing task: 11
+1115 ms: doing task: 10
+1216 ms: doing task: 9
+1317 ms: doing task: 8
+1418 ms: doing task: 7
+1519 ms: doing task: 6
+1620 ms: doing task: 5
+1720 ms: doing task: 4
+1822 ms: doing task: 3
+1924 ms: doing task: 2
+2027 ms: doing task: 1
+
