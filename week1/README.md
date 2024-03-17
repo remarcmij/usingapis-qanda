@@ -97,6 +97,8 @@ For a deeper dive, see for example <https://medium.com/swlh/implement-a-simple-p
 
 _Async and promise perform the same task which one should we use? is there condition to use Async over promises_
 
+`async/await` is a newer syntax for _consuming_ promises, not a full replacement for promises. It is a more modern alternative to `.then()/.catch()`. We will discuss `async/await` in detail next week.
+
 ### Rasha Alsh
 
 _How can we deal with callback hell when working with others?_
