@@ -1,5 +1,4 @@
-const NOBEL_PRIZE_API =
-  'http://api.nobelprize.org/2.1/laureates?limit=10&sort=asc';
+const EXAMPLE_API = 'http://raspi5:3000/pokemons';
 
 async function fetchData(url) {
   const response = await fetch(url);
@@ -25,7 +24,7 @@ function renderError(err) {
 
 async function main() {
   try {
-    const jsonData = await fetchData(NOBEL_PRIZE_API);
+    const jsonData = await fetchData(EXAMPLE_API);
     renderData(jsonData);
   } catch (err) {
     renderError(err);
