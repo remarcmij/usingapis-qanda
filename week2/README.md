@@ -16,16 +16,13 @@
   - fetch
   - JSON
 
-- Async/await experiments
-
-- Prep exercises student solutions:
-  - Catwalk async/await
-  - Pokemon fetch try/catch
-- Error handling in Web Apps
-- JSON experiments
-- Fetch/CORS experiment
-
-- Go through questions
+1. Async/await experiments
+2. Catwalk async/await prep exercise
+3. Error handling discussion
+4. Pokemon fetch try/catch prep exercise
+5. JSON experiments
+6. Fetch/CORS experiment
+7. Go through questions
 
 Break at 13:15
 
@@ -41,9 +38,9 @@ This section is about designing the _error path_.
 - Ultimate goal is to inform the user of _anticipated_ application errors and, if possible, give options on how to gracefully recover from an error.
 - Logging to the browser console is NOT equivalent to informing the user. End users do not routinely look for errors in the browsers console (developers on the other hand should always keep an eye on the console when developing for the browser).
 - Handle the error in such a way that:
-  a. The function that normally expects a valid response does not crash.
+  a. The function that normally expects a valid response does not crash because it is getting error info instead of the expected data.
   b. The error is rendered to the page, preferable in user (non-technical) terms.
-- You should not try and handle JavaScript runtime errors or application bugs, such as trying to modify a `const` variable, etc. Such errors should be allowed to crash your program (with a stack trace) so that you (as a developer) get alerted to the problem early and can promptly fix it.
+- You should not try and handle JavaScript runtime errors or application bugs (i.e. unexpected errors), such as trying to modify a `const` variable, etc. Such errors should be allowed to crash your program (with a stack trace) so that you (as a developer) get alerted to the problem early and can promptly fix it.
 
 ## Questions
 

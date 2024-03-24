@@ -11,7 +11,7 @@ function fakeFetch(url) {
 }
 
 function watchDog(timeout) {
-  return new Promise((_, reject) => {
+  return new Promise((resolve, reject) => {
     setTimeout(() => {
       reject(new Error('Fetch timed out'));
     }, timeout);

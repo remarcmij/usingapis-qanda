@@ -31,16 +31,18 @@ function dance(img) {
   });
 }
 
-function catWalk() {
+async function catWalk() {
   const img = document.querySelector('img');
   const startPos = -img.width;
   const centerPos = (window.innerWidth - img.width) / 2;
   const stopPos = window.innerWidth;
 
-  walk(img, startPos, centerPos)
-    .then(() => dance(img))
-    .then(() => walk(img, centerPos, stopPos))
-    .then(catWalk);
+  // Use async/await syntax to loop the walk and dance functions
+
+  await walk(img, startPos, centerPos);
+  await dance(img);
+  await walk(img, centerPos, stopPos);
+  await catWalk();
 }
 
 window.addEventListener('load', catWalk);
