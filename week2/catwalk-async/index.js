@@ -38,11 +38,6 @@ async function catWalk() {
   const stopPos = window.innerWidth;
 
   // Use async/await syntax to loop the walk and dance functions
-
-  await walk(img, startPos, centerPos);
-  await dance(img);
-  await walk(img, centerPos, stopPos);
-  await catWalk();
 }
 
 window.addEventListener('load', catWalk);

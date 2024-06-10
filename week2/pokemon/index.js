@@ -48,16 +48,7 @@ function renderError(err) {
 
 function main() {
   const button = document.querySelector('#button');
-  button.addEventListener('click', async () => {
-    try {
-      const option = document.querySelector('#option');
-      const url = option.checked ? INVALID_URL : VALID_URL;
-      const pokemons = await fetchJSON(url);
-      renderResults(pokemons);
-    } catch (err) {
-      renderError(err);
-    }
-  });
+  button.addEventListener('click', async () => {});
 }
 
 window.addEventListener('load', main);

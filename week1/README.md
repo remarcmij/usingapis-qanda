@@ -8,11 +8,7 @@
 
 (Start recording!)
 
-- Prep exercise: Cat Walk
-
-- Cat Walk using callbacks ([Continuation Passing Style](https://bessiambre.medium.com/continuation-passing-style-patterns-for-javascript-5528449d3070))
-
-- Cat Walk callback hell
+- Set context: Question from Mustafa Durmus
 
 - Promise experiments
 
@@ -20,7 +16,16 @@
 
 - Go through questions
 
-Advanced Event Loop video: <https://youtu.be/cCOL7MC4Pl0>
+- Prep exercise: Cat Walk
+
+- Cat Walk using callbacks ([Continuation Passing Style](https://bessiambre.medium.com/continuation-passing-style-patterns-for-javascript-5528449d3070))
+
+- Cat Walk callback hell
+
+More event loop videos:
+
+- <https://youtu.be/eiC58R16hb8?si=NESGMiIrCvNFrEjT>
+- <https://youtu.be/cCOL7MC4Pl0>
 
 ## Promise evolution
 
@@ -32,75 +37,75 @@ Advanced Event Loop video: <https://youtu.be/cCOL7MC4Pl0>
 
 ## Questions
 
-### Hailemariam Tsigabu Gebreyohannes
+### yousra
 
-_how does promises improve the callback way of implementation?_
+How can you handle errors in a promise chain
 
-1. Replaces ever deeper nesting with chaining
-2. Promises are garuanteed to be immutable once settled
-3. Ease to aggregate (`Promise.all()`, `Promise.race()`, etc)
+### Mustafa Durmus
 
-### Ahmet Dogan
+Is it better to handle a Promise using then and catch functions inside the function that returns the Promise, or should you handle it after calling that function?
 
-_If our promise function does not return a resolvable value why do we need to use promise instead of normal function?_
+### mahtab mardani
 
-Sometimes we are not really interested in what a promise resolved to (i.e., its resolved value) but rather that it has been resolved (i.e. the _when_ rather than the _what_). An example is the catwalk prep exercise.
+I understand that both setTimeout and setInterval are used for managing asynchronous operations in JavaScript. Could you explain the exact difference between these two and in what scenarios each should be used for handling asynchronous tasks? (edited)
 
-### Mohammed Gumaan
+### Hanna
 
-1. _Where is it preferable to use callbacks over promises and vice versa?_
+Please explain the chaining code below. If we want operations to execute one after another, why do we use asynchronous operations in the first place? In normal control flow the code would be executed from top to bottom, so why do we have to complicate things with .then()?The screen capture is taken from learning materials (edited)
+image.png
 
-   This question is only relevant for _asynchronous_ callbacks. You can't use promises for synchronous callbacks nor do you need to.
+### Ozlem Karaboga
 
-   If the code is simple and does not involve multiple/nested callbacks then you might consider using a callback instead of creating a promise yourself. However if you are calling an async function provided by a modern JavaScript library it will in almost all cases return a promise.
+How can developers prevent 'Promise' from entering the 'Rejected' state during asynchronous tasks and effectively manage this situation?
 
-2. _What are some techniques for debugging and testing asynchronous code in JavaScript applications?_
+### Mustafa Sarıtaş
 
-   - Debugging: console.log, use breakpoints
-   - Testing: testing libraries such as `jest`
+When we receive a Promise and it is fulfilled, we handle the response with response.json() inside the then() function. However, sometimes we use response.text() inside then() instead. What determines our choice between these two methods?
 
-3. _Is the event loop exclusive to browsers?_
+### Mustafa Durmus
 
-   No. Node.js also uses an event loop. Also GUIs (Windows, MacOS, Gnome) are event driven and use an event loop (in Windows it is called a message loop).
+Dear
+@Hanna
 
-### Bereket
+I didn't quite understand the first part of your question, but I do have an idea for the second part. When a promise reaches a ready state, it either resolves or rejects. As you know, this must be handled by the then() function to access the data. In this case, the promise returns a resolve, which should be handled by the then() function.
+The first then() handles the initial promise, and you can use its data within the second then(). The second then() also returns a promise. If you want to use the value from the second then(), you'll need to handle it with a third then(). Otherwise, you won't be able to access the data from the second then().
+The benefits of chaining then() are:
+Each then() allows you to handle the result of the previous operation and pass the processed result to the next operation. This is useful for performing a series of dependent asynchronous tasks.
+It makes the code more readable and easier to maintain, as each then() handles a specific part of the workflow.
 
-_What exactly is the Heap, in relation to the Stack?_
+### Mustafa Durmus
 
-The Heap is a region of memory (RAM) reserved for storing data from variables (simples values, arrays, objects etc).
+Dear
+@Mustafa Sarıtaş
+I'd like to share some thoughts on your question. When we receive a plain text file as a Promise<Response> from an API request, we can handle it by using response.text() inside a then() function. This method resolves the data as a string, so we need another then() to handle the Promise<String> and use the data effectively.
+Similarly, if we receive data in JSON format as a Promise<Response>, we handle it using response.json() inside a then() function. This method resolves the data as a JavaScript object, so we need another then() to handle the Promise<any> returned by json() and use the data appropriately.
 
-The Stack is a region of memory (RAM) reserved for keeping track of function calls and returns (information stored in stack frames that are pushed to, and popped from the stack).
+Moayad Mohammed - Ashabi
+18 hours ago
+How can asynchronous code be effectively unit-tested considering the nature of callbacks and the dependencies on external content?
 
-### Ibrahim Sahin
+#### Answer
 
-_what is JSON? a JS object?_
+Example with fetch: <https://www.leighhalliday.com/mock-fetch-jest>
 
-From Windows Copilot: JSON (JavaScript Object Notation) is a standardized format for representing structured data.
+How does the Event Loop handle situations where multiple asynchronous operations with different priorities (e.g., I/O bound vs. CPU bound) are triggered concurrently?
 
-JSON data is a string that can be converted to a JS object (provided that the JSON data string conforms to the syntax prescribed by the JSON standard).
+### Mustafa Durmus
 
-### Hana Hulic
+Hello
+@Moayad
+I've got a couple of thoughts on your second question about the Event Loop. Since JavaScript operates as a single-threaded language, managing the call stack is crucial to avoid introducing multi-threaded tasks. Asynchronous operations like setTimeout() or keyboard events are handed off to Web APIs for processing, which operate in a multi-threaded environment. Once these tasks are completed, they're placed in the callback queue, following a first-in-first-out (FIFO) structure.
+Then comes the role of the event loop: it continually checks if the call stack is empty. When it is, the event loop picks the first "ready task" from the callback queue and pushes it onto the call stack for execution.
+This mechanism ensures that asynchronous tasks are executed efficiently without blocking the main execution thread.
 
-_What are some scenarios in which async functions can be used?_
+### Ali Ibrahim
 
-Async functions are used to be notified when async processes are completed (either successfully or with failure). Async processes are used for operations that are (1) relative slow as compared to the speed of the CPU and (2) can be executed indepently from the main execution thread. Examples: network requests, database access, disk I/O etc.
+How can promises help mitigate callback hell?
 
-### Rustam
+### Abdulaziz Sığar
 
-_How then() method works?_
+What is a RESTful API and how to use it in a web application? Also, what are the key components of a RESTful API?
 
-The `.then()` method registers a success handler function (and optionally an error handler function) to be called when a promise eventually resolves or repectively rejects.
+### M.​Hajjar
 
-For a deeper dive, see for example <https://medium.com/swlh/implement-a-simple-promise-in-javascript-20c9705f197a>
-
-### Lidya Tesfamariam
-
-_Async and promise perform the same task which one should we use? is there condition to use Async over promises_
-
-`async/await` is a newer syntax for _consuming_ promises, not a full replacement for promises. It is a more modern alternative to `.then()/.catch()`. We will discuss `async/await` in detail next week.
-
-### Rasha Alsh
-
-_How can we deal with callback hell when working with others?_
-
-In a project, agree with your team members on a common approach.
+Is it safe to use a public API's and can we use it as long it's public? , or we should always consider different factors?
