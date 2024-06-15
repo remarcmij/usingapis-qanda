@@ -1,6 +1,8 @@
 /*
-  Old-style JavaScript (pre-ES6) using XMLHttpRequest, var, and no
+  Old-style JavaScript (pre-ES6) using XMLHttpRequest (IE7, 2006), var, and no
   arrow functions.
+
+  https://en.wikipedia.org/wiki/XMLHttpRequest
 */
 function getData(url, cb) {
   var request = new XMLHttpRequest();
@@ -8,7 +10,7 @@ function getData(url, cb) {
   request.open('GET', url, true);
 
   request.onreadystatechange = function () {
-    if (request.readyState == XMLHttpRequest.DONE) {
+    if (request.readyState === XMLHttpRequest.DONE) {
       if (request.status >= 200 && request.status < 400) {
         var json = JSON.parse(request.responseText);
         cb(null, json);
@@ -35,8 +37,8 @@ function main() {
     containerEl.innerHTML = JSON.stringify(data, null, 2);
   }
 
-  selectEl.addEventListener('change', function (e) {
-    var url = `https://jsonplaceholder.typicode.com/${e.target.value}`;
+  selectEl.addEventListener('change', function (event) {
+    var url = `https://jsonplaceholder.typicode.com/${event.target.value}`;
     getData(url, responseCallback);
   });
 }

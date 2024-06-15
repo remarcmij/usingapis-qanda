@@ -1,3 +1,5 @@
+/* axios: 2016 */
+
 /* global axios */
 
 function getData(url) {
