@@ -1,11 +1,16 @@
 /* fetch 2015 (Chrome) */
 
 async function getData(url) {
-  const response = await fetch(url);
-  if (response.ok) {
-    return response.json();
+  try {
+    const response = await fetch(url);
+    if (response.ok) {
+      const data = await response.json();
+      return data;
+    }
+    throw new Error(`Request failed: HTTP ${response.status}`);
+  } catch (error) {
+    console.error(error.message);
   }
-  throw new Error(`Request failed: HTTP ${response.status}`);
 }
 
 function main() {
