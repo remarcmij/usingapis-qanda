@@ -1,11 +1,16 @@
-const EXAMPLE_API = 'https://new.taalmap.nl/api/topics/vandale-nl-id';
+const EXAMPLE_API = '/pokemonsx';
 
 async function fetchData(url) {
-  const response = await fetch(url);
-  if (!response.ok) {
-    throw new Error(`HTTP Error ${response.status} - ${response.statusText}`);
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`HTTP Error ${response.status} - ${response.statusText}`);
+    }
+    return response.json();
+  } catch (error) {
+    console.log(error);
+    return null;
   }
-  return response.json();
 }
 
 function renderData(jsonData) {
@@ -23,11 +28,11 @@ function renderError(err) {
 }
 
 async function main() {
-  try {
-    const jsonData = await fetchData(EXAMPLE_API);
+  const jsonData = await fetchData(EXAMPLE_API);
+  if (jsonData !== null) {
     renderData(jsonData);
-  } catch (err) {
-    renderError(err);
+  } else {
+    renderError(new Error('Oops..'));
   }
 }
 
