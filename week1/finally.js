@@ -1,26 +1,18 @@
-console.log('starting');
-
-const timer = setInterval(() => {
-  console.log('blip');
+const timer = setTimeout(() => {
+  console.log('timed out');
 }, 1000);
 
 // Create a resolved promise
-Promise.reject()
-  .then(() => {
-    console.log('then 1');
+const finalPromise = Promise.resolve('42')
+  .then((result) => {
+    console.log('then', result);
+    return result;
   })
-  .then(() => {
-    console.log('then 2');
-  })
-  .then(() => {
-    console.log('then 3');
-  })
-  .catch(() => {
-    console.log('catch 1');
+  .catch((err) => {
+    console.log('catch', err);
+    return err;
   })
   .finally(() => {
-    console.log('clearing timer');
-    clearInterval(timer);
+    console.log('finally');
+    clearTimeout(timer);
   });
-
-console.log('ending');
