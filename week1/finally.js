@@ -3,7 +3,7 @@ const timer = setTimeout(() => {
 }, 1000);
 
 // Create a resolved promise
-const finalPromise = Promise.resolve('42')
+Promise.resolve('42')
   .then((result) => {
     console.log('then', result);
     return result;
