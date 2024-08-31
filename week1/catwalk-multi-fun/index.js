@@ -65,7 +65,7 @@ function createCatWalkPromises(numCats, rejectCat) {
   return promises;
 }
 
-const REJECT_CAT = -1; // E.g., change to 3 to reject Cat-3
+const REJECT_CAT = 2; // E.g., change to 3 to reject Cat-3
 
 function catWalks() {
   const promises = createCatWalkPromises(3, REJECT_CAT);
@@ -76,11 +76,11 @@ function catWalks() {
       beep();
       displayResult(catWalks, '.then()', resolvedVal);
     })
-    .then(catWalks)
     .catch((rejectedVal) => {
       beep();
       displayResult(catWalks, '.catch()', rejectedVal);
-    });
+    })
+    .finally(catWalks);
 }
 
 document.querySelector('button').addEventListener('click', catWalks);
