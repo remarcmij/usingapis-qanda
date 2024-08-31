@@ -6,6 +6,5 @@
   "code-runner.showExecutionMessage": false,
   "editor.codeActionsOnSave": {
     "source.fixAll": "never"
-  },
-  "liveServer.settings.port": 5501
+  }
 }
