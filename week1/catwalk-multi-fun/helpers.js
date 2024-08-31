@@ -1,4 +1,4 @@
-export function displayResult(fn, handledBy, promiseResult) {
+export function displayResult(fn, thenOrCatch, promiseResult) {
   const code = fn.toString();
 
   let promiseType = 'Promise.?unknown?';
@@ -11,7 +11,7 @@ export function displayResult(fn, handledBy, promiseResult) {
   } else if (code.includes('Promise.race')) {
     promiseType = 'Promise.race()';
   }
-  let message = promiseType + ' ' + handledBy + ' ';
+  let message = promiseType + thenOrCatch + ' ';
   if (Array.isArray(promiseResult)) {
     message +=
       '[' +

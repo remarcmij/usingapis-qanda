@@ -15,7 +15,7 @@ function walk(img, startPos, stopPos, stepInterval) {
         clearInterval(intervalId);
         resolve();
       }
-    }, stepInterval * 4);
+    }, stepInterval * 3);
   });
 }
 
@@ -30,15 +30,16 @@ function dance(img) {
   });
 }
 
-function catWalk(catNum, top, stepInterval) {
+function catWalk(catNum, top, stepInterval, rejectNum) {
   const img = document.createElement('img');
   img.src = 'http://www.anniemation.com/clip_art/images/cat-walk.gif';
+  const imgWidth = 296; // Rendered width not available at this point
   img.style.top = `${top}px`;
-  img.style.left = `${-img.width}px`;
+  img.style.left = `${-imgWidth}px`;
   document.body.append(img);
 
-  const startPos = -img.width;
-  const centerPos = (window.innerWidth - img.width) / 2;
+  const startPos = -imgWidth;
+  const centerPos = (window.innerWidth - imgWidth) / 2;
   const stopPos = window.innerWidth;
 
   return walk(img, startPos, centerPos, stepInterval)
@@ -46,36 +47,39 @@ function catWalk(catNum, top, stepInterval) {
     .then(() => walk(img, centerPos, stopPos, stepInterval))
     .then(() => img.remove())
     .then(() => {
-      if (catNum === 3) {
-        // throw `Cat-${catNum} rejected`;
+      if (catNum === rejectNum) {
+        throw `Cat-${catNum} rejects`;
       }
-      return `Cat-${catNum} resolved`;
+      return `Cat-${catNum} resolves`;
     });
 }
 
-function createCatWalkPromises(numCats) {
+function createCatWalkPromises(numCats, rejectCat) {
   const promises = [];
   for (let i = 0; i < numCats; i++) {
     const stepInterval = 20 - i * 3;
     const top = 75 + i * 200;
-    promises.push(catWalk(i + 1, top, stepInterval));
+    const catNum = i + 1;
+    promises.push(catWalk(catNum, top, stepInterval, rejectCat));
   }
   return promises;
 }
 
+const REJECT_CAT = -1; // E.g., change to 3 to reject Cat-3
+
 function catWalks() {
-  const promises = createCatWalkPromises(3);
+  const promises = createCatWalkPromises(3, REJECT_CAT);
 
   // Try: .all, .allSettled, .any, .race
   return Promise.all(promises)
     .then((resolvedVal) => {
       beep();
-      displayResult(catWalks, 'THEN', resolvedVal);
+      displayResult(catWalks, '.then()', resolvedVal);
     })
     .then(catWalks)
     .catch((rejectedVal) => {
       beep();
-      displayResult(catWalks, 'CATCH', rejectedVal);
+      displayResult(catWalks, '.catch()', rejectedVal);
     });
 }
 
