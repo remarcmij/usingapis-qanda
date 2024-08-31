@@ -33,12 +33,13 @@ function dance(img) {
 function catWalk(top, stepInterval) {
   const img = document.createElement('img');
   img.src = 'http://www.anniemation.com/clip_art/images/cat-walk.gif';
+  const imgWidth = 296; // Rendered width not available at this point
   img.style.top = `${top}px`;
-  img.style.left = `${-img.width}px`;
+  img.style.left = `${-imgWidth}px`;
   document.body.append(img);
 
-  const startPos = -img.width;
-  const centerPos = (window.innerWidth - img.width) / 2;
+  const startPos = -imgWidth;
+  const centerPos = (window.innerWidth - imgWidth) / 2;
   const stopPos = window.innerWidth;
 
   return walk(img, startPos, centerPos, stepInterval)
@@ -49,13 +50,13 @@ function catWalk(top, stepInterval) {
 
 function catWalks() {
   const promises = [];
-  for (let i = 0; i < 5; i++) {
-    const stepInterval = 12 + Math.round(Math.random() * 8);
-    const top = i * 300;
+  for (let i = 0; i < 3; i++) {
+    const stepInterval = 20 - i * 3;
+    const top = 75 + i * 200;
     promises.push(catWalk(top, stepInterval));
   }
 
   Promise.all(promises).then(beep).then(catWalks);
 }
 
-window.addEventListener('load', catWalks);
+document.querySelector('button').addEventListener('click', catWalks);
