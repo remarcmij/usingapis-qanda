@@ -30,7 +30,7 @@ function dance(img) {
   });
 }
 
-function catWalk(top, stepInterval) {
+function catWalk(catNum, top, stepInterval) {
   const img = document.createElement('img');
   img.src = 'http://www.anniemation.com/clip_art/images/cat-walk.gif';
   img.style.top = `${top}px`;
@@ -44,18 +44,53 @@ function catWalk(top, stepInterval) {
   return walk(img, startPos, centerPos, stepInterval)
     .then(() => dance(img))
     .then(() => walk(img, centerPos, stopPos, stepInterval))
-    .then(() => img.remove());
+    .then(() => img.remove())
+    .then(() => {
+      // return `Cat-${catNum} resolved`;
+      throw `Cat-${catNum} rejected`;
+    });
+}
+
+function createCatWalkPromises(numCats) {
+  const promises = [];
+  for (let i = 0; i < numCats; i++) {
+    const stepInterval = 12 + Math.round(Math.random() * 8);
+    const top = 100 + i * 300;
+    promises.push(catWalk(i + 1, top, stepInterval));
+  }
+  return promises;
+}
+
+function displayResult(handledBy, promiseResult) {
+  let message = handledBy + ' ';
+  if (Array.isArray(promiseResult)) {
+    message +=
+      '[' +
+      promiseResult
+        .map((val) => JSON.stringify(val))
+        .join(', ')
+        .replaceAll('"', '') +
+      ']';
+  } else {
+    message += promiseResult;
+  }
+  document.querySelector('#message').textContent = message;
 }
 
 function catWalks() {
-  const promises = [];
-  for (let i = 0; i < 5; i++) {
-    const stepInterval = 12 + Math.round(Math.random() * 8);
-    const top = i * 300;
-    promises.push(catWalk(top, stepInterval));
-  }
+  const promises = createCatWalkPromises(3);
 
-  Promise.all(promises).then(beep).then(catWalks);
+  // Try: .all, .allSettled, .any, .race
+  return Promise.all(promises)
+    .then((resolvedVal) => {
+      beep();
+      displayResult('THEN', resolvedVal);
+    })
+    .then(catWalks)
+    .catch((rejectedVal) => {
+      beep();
+      displayResult('CATCH', rejectedVal);
+    });
 }
 
-window.addEventListener('load', catWalks);
+document.querySelector('button').addEventListener('click', catWalks);
