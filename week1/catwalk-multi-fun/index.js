@@ -1,4 +1,4 @@
-import { playSound as beep } from './beep.js';
+import { beep, displayResult } from './helpers.js';
 
 const STEP_SIZE_PX = 10;
 const DANCE_TIME_MS = 5000;
@@ -46,50 +46,36 @@ function catWalk(catNum, top, stepInterval) {
     .then(() => walk(img, centerPos, stopPos, stepInterval))
     .then(() => img.remove())
     .then(() => {
-      // return `Cat-${catNum} resolved`;
-      throw `Cat-${catNum} rejected`;
+      if (catNum === 3) {
+        // throw `Cat-${catNum} rejected`;
+      }
+      return `Cat-${catNum} resolved`;
     });
 }
 
 function createCatWalkPromises(numCats) {
   const promises = [];
   for (let i = 0; i < numCats; i++) {
-    const stepInterval = 12 + Math.round(Math.random() * 8);
-    const top = 100 + i * 300;
+    const stepInterval = 20 - i * 3;
+    const top = 75 + i * 200;
     promises.push(catWalk(i + 1, top, stepInterval));
   }
   return promises;
-}
-
-function displayResult(handledBy, promiseResult) {
-  let message = handledBy + ' ';
-  if (Array.isArray(promiseResult)) {
-    message +=
-      '[' +
-      promiseResult
-        .map((val) => JSON.stringify(val))
-        .join(', ')
-        .replaceAll('"', '') +
-      ']';
-  } else {
-    message += promiseResult;
-  }
-  document.querySelector('#message').textContent = message;
 }
 
 function catWalks() {
   const promises = createCatWalkPromises(3);
 
   // Try: .all, .allSettled, .any, .race
-  return Promise.all(promises)
+  return Promise.race(promises)
     .then((resolvedVal) => {
       beep();
-      displayResult('THEN', resolvedVal);
+      displayResult(catWalks, 'THEN', resolvedVal);
     })
     .then(catWalks)
     .catch((rejectedVal) => {
       beep();
-      displayResult('CATCH', rejectedVal);
+      displayResult(catWalks, 'CATCH', rejectedVal);
     });
 }
 
