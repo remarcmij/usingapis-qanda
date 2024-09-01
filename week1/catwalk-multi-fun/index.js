@@ -80,7 +80,7 @@ function catWalks() {
       beep();
       displayResult(catWalks, '.catch()', rejectedVal);
     })
-    .finally(catWalks);
+    .then(catWalks);
 }
 
 document.querySelector('button').addEventListener('click', catWalks);
