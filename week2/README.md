@@ -16,17 +16,14 @@
   - fetch
   - JSON
 
-Week 3: Project
-
 1. Async/await experiments
 2. Catwalk async/await prep exercise
 3. Error handling discussion
-4. Pokemon fetch try/catch prep exercise; load indicator
+4. Pokemon fetch try/catch prep exercise
 5. JSON experiments
 6. Fetch/CORS experiment
-7. Go through questions
-
-Break at 13:15
+7. Week 3 Project: Example app with error handling and loading indicator
+8. Go through questions
 
 ### Error Handling in Web Apps
 

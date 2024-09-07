@@ -1,16 +1,11 @@
-const EXAMPLE_API = '/pokemonsx';
+const EXAMPLE_API = 'http://localhost:3000/pokemons';
 
 async function fetchData(url) {
-  try {
-    const response = await fetch(url);
-    if (!response.ok) {
-      throw new Error(`HTTP Error ${response.status} - ${response.statusText}`);
-    }
-    return response.json();
-  } catch (error) {
-    console.log(error);
-    return null;
+  const response = await fetch(url);
+  if (!response.ok) {
+    throw new Error(`HTTP Error ${response.status} - ${response.statusText}`);
   }
+  return response.json();
 }
 
 function renderData(jsonData) {
@@ -28,11 +23,11 @@ function renderError(err) {
 }
 
 async function main() {
-  const jsonData = await fetchData(EXAMPLE_API);
-  if (jsonData !== null) {
+  try {
+    const jsonData = await fetchData(EXAMPLE_API);
     renderData(jsonData);
-  } else {
-    renderError(new Error('Oops..'));
+  } catch (err) {
+    renderError(err);
   }
 }
 
