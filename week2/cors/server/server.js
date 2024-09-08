@@ -1,7 +1,7 @@
 import express from 'express';
 
 const app = express();
-const port = 3000;
+const port = 3030;
 
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');

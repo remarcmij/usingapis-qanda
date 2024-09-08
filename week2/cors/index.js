@@ -1,4 +1,4 @@
-const EXAMPLE_API = 'https://new.taalmap.nl/api/topics/vandale-nl-id';
+const EXAMPLE_API = 'http://localhost:3000/pokemons';
 
 async function fetchData(url) {
   const response = await fetch(url);

@@ -24,7 +24,6 @@ export function createReposPage(state) {
       return reposView;
     } catch (error) {
       state = { ...state, error, loading: false };
-      reposView.update(state);
       loadPage(createErrorPage, state);
     }
   };
