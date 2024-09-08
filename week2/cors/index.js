@@ -1,4 +1,4 @@
-const EXAMPLE_API = 'http://localhost:3000/pokemons';
+const EXAMPLE_API = 'http://localhost:3030/pokemons';
 
 async function fetchData(url) {
   const response = await fetch(url);
@@ -22,7 +22,7 @@ function renderError(err) {
   root.appendChild(h1);
 }
 
-async function main() {
+async function getPoko() {
   try {
     const jsonData = await fetchData(EXAMPLE_API);
     renderData(jsonData);
@@ -31,4 +31,4 @@ async function main() {
   }
 }
 
-window.addEventListener('load', main);
+window.addEventListener('load', getPoko);

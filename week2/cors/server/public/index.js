@@ -1,4 +1,4 @@
-const EXAMPLE_API = 'http://localhost:3000/pokemons';
+const EXAMPLE_API = 'http://localhost:3030/pokemons';
 
 async function fetchData(url) {
   const response = await fetch(url);

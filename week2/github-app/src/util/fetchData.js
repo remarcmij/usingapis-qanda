@@ -6,16 +6,12 @@ export async function fetchData(url) {
   const res = await fetch(url, {
     headers: { accept: 'application/vnd.github+json' },
   });
+
   if (!res.ok) {
     throw new Error(`HTTP ${res.status}  ${res.statusText}`);
   }
 
-  let data = null;
-  if (res.status !== HTTP_STATUS_NO_CONTENT) {
-    data = await res.json();
-  }
-
-  return data;
+  return res.json();
 }
 
 export async function fetchCached(url) {
@@ -31,7 +27,7 @@ export async function fetchCached(url) {
 }
 
 export async function fetchSlowAndUnreliable(url) {
-  await new Promise((resolve) => setTimeout(resolve, 1000));
+  await new Promise((resolve) => setTimeout(resolve, 5000));
   if (Math.random() < 0.4) {
     throw new Error('Server is down');
   }

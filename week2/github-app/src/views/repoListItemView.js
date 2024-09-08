@@ -3,10 +3,10 @@ export function createRepoListItemView({ repo }) {
   root.className = 'list-item whiteframe';
 
   root.innerHTML = String.raw`
-    <div>
+    <li>
       <h4>${repo.name}</h4>
       <p>${repo.description || 'No description available.'}</p>
-    </div>
+    </li>
   `;
 
   return { root };

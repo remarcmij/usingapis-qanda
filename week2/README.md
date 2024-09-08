@@ -22,7 +22,8 @@
 4. Pokemon fetch try/catch prep exercise
 5. JSON experiments
 6. Fetch/CORS experiment
-7. Week 3 Project: Example app with error handling and loading indicator
+7. Week 3 Project
+   - Example app with error handling and loading indicator
 8. Go through questions
 
 ### Error Handling in Web Apps
@@ -41,4 +42,10 @@ This section is about designing the _error path_.
   b. The error is rendered to the page, preferable in user (non-technical) terms.
 - You should not try and handle JavaScript runtime errors or application bugs (i.e. unexpected errors), such as trying to modify a `const` variable, etc. Such errors should be allowed to crash your program (with a stack trace) so that you (as a developer) get alerted to the problem early and can promptly fix it.
 
-## Questions
+## Project
+
+See: <https://github.com/HackYourFuture/UsingAPIs/tree/main/Week3>
+
+Please note:
+
+> The app needs to have loading/error handling for the interaction with the API and needs to show this to the user, not just a console.log.

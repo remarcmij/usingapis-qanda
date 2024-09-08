@@ -64,5 +64,5 @@ export function createReposView(props) {
     });
   };
 
-  return { root, update: update };
+  return { root, update };
 }

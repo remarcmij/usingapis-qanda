@@ -14,14 +14,13 @@ export function createReposPage(state) {
 
   const render = async () => {
     try {
-      state = { ...state, error: null, loading: false, repos: null };
-      reposView.update({ error: null, loading: true, repos: null });
+      state = { ...state, error: null, loading: true, repos: null };
+      reposView.update(state);
       const url = `${API_BASE_URL}/orgs/${state.organization}/repos?per_page=100`;
       const repos = await fetchSlowAndUnreliable(url);
       repos.sort((a, b) => a.name.localeCompare(b.name));
       state = { ...state, repos, loading: false };
       reposView.update(state);
-      return reposView;
     } catch (error) {
       state = { ...state, error, loading: false };
       loadPage(createErrorPage, state);
