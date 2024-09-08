@@ -32,10 +32,10 @@ In the application `state` object all data that our application uses is held. Th
 
 A `page` object is created by calling a Page Factory function. In this sample application there are two pages and two corresponding factory functions:
 
-| File                    | Page Factory Function |
-| ----------------------- | --------------------- |
-| `src/pages/reposPage.js | `createReposPage()`   |
-| `src/pages/errorPage.js | `createErrorPage()`   |
+| File                     | Page Factory Function |
+| ------------------------ | --------------------- |
+| `src/pages/reposPage.js` | `createReposPage()`   |
+| `src/pages/errorPage.js` | `createErrorPage()`   |
 
 A `page` object returned by a Page Factory Function should include a `root` property that holds root element of an HTML subtree that constitutes the HTML structure for the page. When the page is loaded this root element is appended to the `<div>` element with `id="page-root"` in the `index.html` file.
 
