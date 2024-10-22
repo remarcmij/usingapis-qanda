@@ -1,13 +1,13 @@
-export class MyPromise {
+export class SyncPromise {
   #value;
   #state = 'pending';
 
   static resolve(value) {
-    return new MyPromise((resolve, reject) => resolve(value));
+    return new SyncPromise((resolve, reject) => resolve(value));
   }
 
   static reject(value) {
-    return new MyPromise((resolve, reject) => reject(value));
+    return new SyncPromise((resolve, reject) => reject(value));
   }
 
   constructor(executor) {
@@ -31,18 +31,18 @@ export class MyPromise {
   then(onResolved, onRejected) {
     if (onResolved && this.#state === 'fulfilled') {
       const newVal = onResolved(this.value);
-      if (newVal instanceof MyPromise) {
+      if (newVal instanceof SyncPromise) {
         return newVal;
       }
-      return MyPromise.resolve(newVal);
+      return SyncPromise.resolve(newVal);
     }
 
     if (onRejected && this.#state === 'rejected') {
       const newVal = onRejected(this.#value);
-      if (newVal instanceof MyPromise) {
+      if (newVal instanceof SyncPromise) {
         return newVal;
       }
-      return MyPromise.resolve(newVal);
+      return SyncPromise.resolve(newVal);
     }
 
     return this;

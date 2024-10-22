@@ -1,4 +1,5 @@
-// import { MyPromise as Promise } from './my-promise.js';
+// import { SyncPromise as Promise } from './sync-promise.js';
+// import { AsyncPromise as Promise } from './async-promise.js';
 
 console.log('starting');
 
