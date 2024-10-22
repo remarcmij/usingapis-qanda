@@ -1,6 +1,6 @@
 export class SyncPromise {
-  #value;
   #state = 'pending';
+  #value = undefined;
 
   static resolve(value) {
     return new SyncPromise((resolve, reject) => resolve(value));
@@ -14,7 +14,7 @@ export class SyncPromise {
     const resolve = (value) => {
       if (this.#state !== 'pending') return;
       this.#state = 'fulfilled';
-      this.value = value;
+      this.#value = value;
     };
 
     const reject = (value) => {
@@ -28,7 +28,7 @@ export class SyncPromise {
 
   then(onResolved, onRejected) {
     if (onResolved && this.#state === 'fulfilled') {
-      const newVal = onResolved(this.value);
+      const newVal = onResolved(this.#value);
       if (newVal instanceof SyncPromise) {
         return newVal;
       }

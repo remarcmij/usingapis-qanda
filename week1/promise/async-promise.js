@@ -12,13 +12,14 @@ export class AsyncPromise {
   }
 
   #state = 'pending';
+  #value = undefined;
   #handlers = [];
 
   constructor(executor) {
     const resolve = (value) => {
       if (this.#state === 'pending') {
         this.#state = 'fulfilled';
-        this.value = value;
+        this.#value = value;
         this.#handlers.forEach((handler) => handler.onFulfilled(value));
       }
     };
@@ -26,7 +27,7 @@ export class AsyncPromise {
     const reject = (value) => {
       if (this.#state === 'pending') {
         this.#state = 'rejected';
-        this.value = value;
+        this.#value = value;
         this.#handlers.forEach((handler) => handler.onRejected(value));
       }
     };
@@ -41,10 +42,10 @@ export class AsyncPromise {
   #onFulFilledCallback(resolve, reject, onFulfilled) {
     try {
       if (!onFulfilled) {
-        resolve(this.value);
+        resolve(this.#value);
         return;
       }
-      const result = onFulfilled(this.value);
+      const result = onFulfilled(this.#value);
       if (result instanceof AsyncPromise) {
         result.then(resolve, reject);
       } else {
@@ -58,10 +59,10 @@ export class AsyncPromise {
   #onRejectedCallback(resolve, reject, onRejected) {
     try {
       if (!onRejected) {
-        reject(this.value);
+        reject(this.#value);
         return;
       }
-      const result = onRejected(this.value);
+      const result = onRejected(this.#value);
       if (result instanceof AsyncPromise) {
         result.then(resolve, reject);
       } else {
@@ -101,16 +102,16 @@ export class AsyncPromise {
   }
 
   finally(onFinally) {
-    return new Promise((resolve, reject) => {
+    return new AsyncPromise((resolve, reject) => {
       queueMicrotask(() => {
         try {
           const result = onFinally();
           if (result instanceof AsyncPromise) {
             result.then(resolve, reject);
           } else if (this.#state === 'fulfilled') {
-            resolve(this.value);
+            resolve(this.#value);
           } else if (this.#state === 'rejected') {
-            reject(this.value);
+            reject(this.#value);
           }
         } catch (err) {
           reject(err);
