@@ -23,9 +23,7 @@ export class SyncPromise {
       this.#value = value;
     };
 
-    if (executor) {
-      executor(resolve, reject);
-    }
+    executor(resolve, reject);
   }
 
   then(onResolved, onRejected) {
