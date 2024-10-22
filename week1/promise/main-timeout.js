@@ -3,7 +3,9 @@ import { AsyncPromise as Promise } from './async-promise.js';
 
 console.log('<<< starting >>>');
 
-Promise.resolve()
+new Promise((resolve, reject) => {
+  setTimeout(reject, 2000);
+})
   .then(() => {
     console.log('  then 1');
   })

@@ -2,6 +2,8 @@
 
 // ! WARNING: headache ahead!
 
+const DEBUG = true;
+
 export class AsyncPromise {
   static resolve(value) {
     return new AsyncPromise((resolve, reject) => resolve(value));
@@ -11,24 +13,34 @@ export class AsyncPromise {
     return new AsyncPromise((resolve, reject) => reject(value));
   }
 
+  static #count = 0;
+
   #state = 'pending';
   #value = undefined;
-  #handlers = [];
+  #rejectedHandlers = [];
+  #fulfilledHandlers = [];
+  #id = 0;
 
   constructor(executor) {
+    this.#id = ++AsyncPromise.#count;
+    DEBUG && console.log(`[constructor #${this.#id}]`);
+
     const resolve = (value) => {
       if (this.#state === 'pending') {
+        DEBUG && console.log(`[resolve #${this.#id}]`);
         this.#state = 'fulfilled';
         this.#value = value;
-        this.#handlers.forEach((handler) => handler.onFulfilled(value));
+        this.#fulfilledHandlers.forEach((handler) => handler());
       }
     };
 
     const reject = (value) => {
       if (this.#state === 'pending') {
+        DEBUG && console.log(`[reject #${this.#id}]`);
         this.#state = 'rejected';
         this.#value = value;
-        this.#handlers.forEach((handler) => handler.onRejected(value));
+
+        this.#rejectedHandlers.forEach((handler) => handler());
       }
     };
 
@@ -45,7 +57,10 @@ export class AsyncPromise {
         resolve(this.#value);
         return;
       }
+
+      DEBUG && console.log(`[handle fulfilled #${this.#id}]`);
       const result = onFulfilled(this.#value);
+
       if (result instanceof AsyncPromise) {
         result.then(resolve, reject);
       } else {
@@ -62,7 +77,10 @@ export class AsyncPromise {
         reject(this.#value);
         return;
       }
+
+      DEBUG && console.log(`[handle rejected #${this.#id}]`);
       const result = onRejected(this.#value);
+
       if (result instanceof AsyncPromise) {
         result.then(resolve, reject);
       } else {
@@ -74,45 +92,29 @@ export class AsyncPromise {
   }
 
   then(onFulfilled, onRejected) {
+    DEBUG && console.log(`[then #${this.#id}]`);
     return new AsyncPromise((resolve, reject) => {
       queueMicrotask(() => {
+        DEBUG && console.log(`[microtask #${this.#id} start ${this.#state}]`);
         if (this.#state === 'fulfilled') {
           this.#fulfilledHandler(resolve, reject, onFulfilled);
         } else if (this.#state === 'rejected') {
           this.#rejectedHandler(resolve, reject, onRejected);
         } else {
           // pending
-          this.#handlers.push({
-            onFulfilled: () =>
-              this.#fulfilledHandler(resolve, reject, onFulfilled),
-            onRejected: () =>
-              this.#rejectedHandler(resolve, reject, onRejected),
-          });
+          this.#fulfilledHandlers.push(() =>
+            this.#fulfilledHandler(resolve, reject, onFulfilled)
+          );
+          this.#rejectedHandlers.push(() =>
+            this.#rejectedHandler(resolve, reject, onRejected)
+          );
         }
+        DEBUG && console.log(`[microtask #${this.#id} exit]`);
       });
     });
   }
 
   catch(onRejected) {
     return this.then(null, onRejected);
-  }
-
-  finally(onFinally) {
-    return new AsyncPromise((resolve, reject) => {
-      queueMicrotask(() => {
-        try {
-          const result = onFinally();
-          if (result instanceof AsyncPromise) {
-            result.then(resolve, reject);
-          } else if (this.#state === 'fulfilled') {
-            resolve(this.#value);
-          } else if (this.#state === 'rejected') {
-            reject(this.#value);
-          }
-        } catch (err) {
-          reject(err);
-        }
-      });
-    });
   }
 }
