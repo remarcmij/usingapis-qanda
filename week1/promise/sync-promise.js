@@ -12,15 +12,17 @@ export class SyncPromise {
 
   constructor(executor) {
     const resolve = (value) => {
-      if (this.#state !== 'pending') return;
-      this.#state = 'fulfilled';
-      this.#value = value;
+      if (this.#state === 'pending') {
+        this.#state = 'fulfilled';
+        this.#value = value;
+      }
     };
 
     const reject = (value) => {
-      if (this.#state !== 'pending') return;
-      this.#state = 'rejected';
-      this.#value = value;
+      if (this.#state === 'pending') {
+        this.#state = 'rejected';
+        this.#value = value;
+      }
     };
 
     executor(resolve, reject);

@@ -39,7 +39,7 @@ export class AsyncPromise {
     }
   }
 
-  #onFulFilledCallback(resolve, reject, onFulfilled) {
+  #fulfilledHandler(resolve, reject, onFulfilled) {
     try {
       if (!onFulfilled) {
         resolve(this.#value);
@@ -56,7 +56,7 @@ export class AsyncPromise {
     }
   }
 
-  #onRejectedCallback(resolve, reject, onRejected) {
+  #rejectedHandler(resolve, reject, onRejected) {
     try {
       if (!onRejected) {
         reject(this.#value);
@@ -76,22 +76,18 @@ export class AsyncPromise {
   then(onFulfilled, onRejected) {
     return new AsyncPromise((resolve, reject) => {
       queueMicrotask(() => {
-        if (this.#state === 'pending') {
+        if (this.#state === 'fulfilled') {
+          this.#fulfilledHandler(resolve, reject, onFulfilled);
+        } else if (this.#state === 'rejected') {
+          this.#rejectedHandler(resolve, reject, onRejected);
+        } else {
+          // pending
           this.#handlers.push({
             onFulfilled: () =>
-              this.#onFulFilledCallback(resolve, reject, onFulfilled),
-
+              this.#fulfilledHandler(resolve, reject, onFulfilled),
             onRejected: () =>
-              this.#onRejectedCallback(resolve, reject, onRejected),
+              this.#rejectedHandler(resolve, reject, onRejected),
           });
-        }
-
-        if (this.#state === 'fulfilled') {
-          this.#onFulFilledCallback(resolve, reject, onFulfilled);
-        }
-
-        if (this.#state === 'rejected') {
-          this.#onRejectedCallback(resolve, reject, onRejected);
         }
       });
     });
