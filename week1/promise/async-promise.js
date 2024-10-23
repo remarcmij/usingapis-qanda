@@ -22,12 +22,11 @@ export class AsyncPromise {
   #id = 0;
 
   constructor(executor) {
+    // Assign a unique id to each promise
     this.#id = ++AsyncPromise.#count;
-    DEBUG && console.log(`[constructor #${this.#id}]`);
 
     const resolve = (value) => {
       if (this.#state === 'pending') {
-        DEBUG && console.log(`[resolve #${this.#id}]`);
         this.#state = 'fulfilled';
         this.#value = value;
         this.#fulfilledHandlers.forEach((handler) => handler());
@@ -36,10 +35,8 @@ export class AsyncPromise {
 
     const reject = (value) => {
       if (this.#state === 'pending') {
-        DEBUG && console.log(`[reject #${this.#id}]`);
         this.#state = 'rejected';
         this.#value = value;
-
         this.#rejectedHandlers.forEach((handler) => handler());
       }
     };
@@ -49,68 +46,72 @@ export class AsyncPromise {
     } catch (err) {
       reject(err);
     }
+
+    DEBUG && console.log(`[promise #${this.#id}] ${this.#state}`);
   }
 
   #fulfilledHandler(resolve, reject, onFulfilled) {
-    try {
-      if (!onFulfilled) {
-        resolve(this.#value);
-        return;
+    queueMicrotask(() => {
+      DEBUG && console.log(`\n[microtask #${this.#id} start]`);
+
+      try {
+        if (!onFulfilled) {
+          resolve(this.#value);
+        } else {
+          const result = onFulfilled(this.#value);
+
+          if (result instanceof AsyncPromise) {
+            result.then(resolve, reject);
+          } else {
+            resolve(result);
+          }
+        }
+      } catch (err) {
+        reject(err);
       }
 
-      DEBUG && console.log(`[handle fulfilled #${this.#id}]`);
-      const result = onFulfilled(this.#value);
-
-      if (result instanceof AsyncPromise) {
-        result.then(resolve, reject);
-      } else {
-        resolve(result);
-      }
-    } catch (err) {
-      reject(err);
-    }
+      DEBUG && console.log(`[microtask #${this.#id} exit]`);
+    });
   }
 
   #rejectedHandler(resolve, reject, onRejected) {
-    try {
-      if (!onRejected) {
-        reject(this.#value);
-        return;
+    queueMicrotask(() => {
+      DEBUG && console.log(`\n[microtask #${this.#id} start]`);
+      try {
+        if (!onRejected) {
+          reject(this.#value);
+        } else {
+          const result = onRejected(this.#value);
+
+          if (result instanceof AsyncPromise) {
+            result.then(resolve, reject);
+          } else {
+            resolve(result);
+          }
+        }
+      } catch (err) {
+        reject(err);
       }
 
-      DEBUG && console.log(`[handle rejected #${this.#id}]`);
-      const result = onRejected(this.#value);
-
-      if (result instanceof AsyncPromise) {
-        result.then(resolve, reject);
-      } else {
-        resolve(result);
-      }
-    } catch (err) {
-      reject(err);
-    }
+      DEBUG && console.log(`[microtask #${this.#id} exit]`);
+    });
   }
 
   then(onFulfilled, onRejected) {
-    DEBUG && console.log(`[then #${this.#id}]`);
     return new AsyncPromise((resolve, reject) => {
-      queueMicrotask(() => {
-        DEBUG && console.log(`[microtask #${this.#id} start ${this.#state}]`);
-        if (this.#state === 'fulfilled') {
-          this.#fulfilledHandler(resolve, reject, onFulfilled);
-        } else if (this.#state === 'rejected') {
-          this.#rejectedHandler(resolve, reject, onRejected);
-        } else {
-          // pending
-          this.#fulfilledHandlers.push(() =>
-            this.#fulfilledHandler(resolve, reject, onFulfilled)
-          );
-          this.#rejectedHandlers.push(() =>
-            this.#rejectedHandler(resolve, reject, onRejected)
-          );
-        }
-        DEBUG && console.log(`[microtask #${this.#id} exit]`);
-      });
+      if (this.#state === 'fulfilled') {
+        this.#fulfilledHandler(resolve, reject, onFulfilled);
+      } else if (this.#state === 'rejected') {
+        this.#rejectedHandler(resolve, reject, onRejected);
+      } else {
+        // pending
+        this.#fulfilledHandlers.push(() =>
+          this.#fulfilledHandler(resolve, reject, onFulfilled)
+        );
+        this.#rejectedHandlers.push(() =>
+          this.#rejectedHandler(resolve, reject, onRejected)
+        );
+      }
     });
   }
 
