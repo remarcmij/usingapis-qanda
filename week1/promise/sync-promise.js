@@ -51,9 +51,4 @@ export class SyncPromise {
   catch(onRejected) {
     return this.then(null, onRejected);
   }
-
-  finally(onFinally) {
-    onFinally();
-    return this;
-  }
 }
