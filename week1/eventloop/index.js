@@ -28,7 +28,6 @@ function main() {
   }, 2000);
 
   Promise.resolve()
-
     .then(function then_1_cb() {
       writeToConsole('>>> then#1');
     })
