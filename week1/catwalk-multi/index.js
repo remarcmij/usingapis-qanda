@@ -1,3 +1,5 @@
+import { AsyncPromise as Promise } from './promises/async-promise.js';
+
 import { playSound as beep } from './beep.js';
 
 const STEP_SIZE_PX = 10;
