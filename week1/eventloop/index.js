@@ -1,28 +1,42 @@
-//! What will be printed to the console and in what order
-'use strict';
+// import { AsyncPromise as Promise } from './promises/async-promise.js';
+
+let timerCount = 0;
 
 function writeToConsole(message) {
   console.log(message);
 }
 
-writeToConsole('1 starting');
+function myTimeout(cb, delay) {
+  timerCount += 1;
+  console.log(`[timer#${timerCount} created]`);
+  setTimeout(() => {
+    console.log(`[timer#${timerCount} start]`);
+    cb();
+    console.log(`[timer#${timerCount} exit]`);
+  }, delay);
+}
 
-setTimeout(function timeout_1_cb() {
-  writeToConsole('2 timeout_1_cb');
-}, 1000);
+function main() {
+  writeToConsole('<<< main starting >>>');
 
-setTimeout(function timeout_2_cb() {
-  writeToConsole('3 timeout_2_cb');
-}, 2000);
+  myTimeout(function timeout_1_cb() {
+    writeToConsole('>>> timer#1');
+  }, 1000);
 
-const p = new Promise((resolve, reject) => {
-  resolve();
-});
+  myTimeout(function timeout_2_cb() {
+    writeToConsole('>>> timer#2');
+  }, 2000);
 
-p.then(function then_1_cb() {
-  writeToConsole('4 then_1_cb');
-}).then(function then_2_cb() {
-  writeToConsole('5 then_2_cb');
-});
+  Promise.resolve()
 
-writeToConsole('6 ending');
+    .then(function then_1_cb() {
+      writeToConsole('>>> then#1');
+    })
+    .then(function then_2_cb() {
+      writeToConsole('>>> then#2');
+    });
+
+  writeToConsole('<<< main ending >>>');
+}
+
+main();
