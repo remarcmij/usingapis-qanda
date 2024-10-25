@@ -1,5 +1,3 @@
-const HTTP_STATUS_NO_CONTENT = 204;
-
 const cache = {};
 
 export async function fetchData(url) {

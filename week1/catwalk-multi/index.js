@@ -1,13 +1,12 @@
-import { AsyncPromise as Promise } from './promises/async-promise.js';
-
-import { playSound as beep } from './beep.js';
+// import { AsyncPromise as Promise } from '../../async-promise/async-promise.js';
 
 const STEP_SIZE_PX = 10;
 const DANCE_TIME_MS = 5000;
 const DANCING_CAT_URL =
   'https://media1.tenor.com/images/2de63e950fb254920054f9bd081e8157/tenor.gif';
 
-function walk(img, startPos, stopPos, stepInterval) {
+function walk(img, startPos, stopPos, stepInterval, catNum) {
+  console.log(`>>> cat#${catNum} walking`);
   return new Promise((resolve) => {
     let position = startPos;
     const intervalId = setInterval(() => {
@@ -21,7 +20,8 @@ function walk(img, startPos, stopPos, stepInterval) {
   });
 }
 
-function dance(img) {
+function dance(img, catNum) {
+  console.log(`>>> cat#${catNum} dancing`);
   return new Promise((resolve) => {
     const savedSrc = img.src;
     img.src = DANCING_CAT_URL;
@@ -32,7 +32,7 @@ function dance(img) {
   });
 }
 
-function catWalk(top, stepInterval) {
+function catWalk(top, stepInterval, catNum) {
   const img = document.createElement('img');
   img.src = 'http://www.anniemation.com/clip_art/images/cat-walk.gif';
   const imgWidth = 296; // Rendered width not available at this point
@@ -44,9 +44,9 @@ function catWalk(top, stepInterval) {
   const centerPos = (window.innerWidth - imgWidth) / 2;
   const stopPos = window.innerWidth;
 
-  return walk(img, startPos, centerPos, stepInterval)
-    .then(() => dance(img))
-    .then(() => walk(img, centerPos, stopPos, stepInterval))
+  return walk(img, startPos, centerPos, stepInterval, catNum)
+    .then(() => dance(img, catNum))
+    .then(() => walk(img, centerPos, stopPos, stepInterval, catNum))
     .then(() => img.remove());
 }
 
@@ -55,10 +55,16 @@ function catWalks() {
   for (let i = 0; i < 3; i++) {
     const stepInterval = 20 - i * 3;
     const top = 75 + i * 200;
-    promises.push(catWalk(top, stepInterval));
+    promises.push(catWalk(top, stepInterval, i + 1));
   }
 
-  Promise.all(promises).then(beep).then(catWalks);
+  Promise.all(promises)
+    .then(() => {
+      console.log('>>> all promises resolved');
+    })
+    .then(() => {
+      catWalks();
+    });
 }
 
 document.querySelector('button').addEventListener('click', catWalks);

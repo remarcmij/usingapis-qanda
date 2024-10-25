@@ -1,3 +1,4 @@
+import { AsyncPromise as Promise } from '../../async-promise/async-promise.js';
 import { playlist, playVideo } from './common.js';
 
 function bingeWatch(videos) {
