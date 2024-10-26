@@ -1,19 +1,21 @@
 function setTimeoutBlocking(callbackFn, time) {
   const endTime = Date.now() + time;
   while (Date.now() < endTime) {
-    // do nothing, just loop until time has passed
+    // do nothing
   }
   callbackFn();
 }
 
-const BLOCKING = true;
-const setTimeoutFn = BLOCKING ? setTimeoutBlocking : setTimeout;
+const setTimeoutNonBlocking = setTimeout;
+
+const BLOCKING = false;
+const setTimeoutFn = BLOCKING ? setTimeoutBlocking : setTimeoutNonBlocking;
 
 let isRunning = false;
 
-function doTasks(maxTasks) {
+function doTasks(taskCount) {
   const doTask = (taskNum) => {
-    if (taskNum > maxTasks || !isRunning) {
+    if (taskNum > taskCount || !isRunning) {
       isRunning = false;
       return;
     }
