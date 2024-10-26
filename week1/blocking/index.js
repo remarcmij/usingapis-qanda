@@ -1,5 +1,3 @@
-import logTime from '../lib/logTime.js';
-
 function setTimeoutBlocking(callbackFn, time) {
   const endTime = Date.now() + time;
   while (Date.now() < endTime) {
@@ -8,7 +6,7 @@ function setTimeoutBlocking(callbackFn, time) {
   callbackFn();
 }
 
-const BLOCKING = false;
+const BLOCKING = true;
 const setTimeoutFn = BLOCKING ? setTimeoutBlocking : setTimeout;
 
 let isRunning = false;
@@ -21,7 +19,7 @@ function doTasks(maxTasks) {
     }
 
     setTimeoutFn(() => {
-      logTime(`task#${taskNum}`);
+      console.log(`task#${taskNum}`);
       doTask(taskNum + 1);
     }, 200);
   };
