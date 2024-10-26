@@ -6,7 +6,7 @@ function writeToConsole(message) {
   console.log(message);
 }
 
-function myTimeout(callback, delay) {
+function timer(callback, delay) {
   timerCount += 1;
   console.log(`[timer#${timerCount} created]`);
   setTimeout(() => {
@@ -19,21 +19,21 @@ function myTimeout(callback, delay) {
 function main() {
   writeToConsole('<<< main starting >>>');
 
-  myTimeout(function timer_1_callback() {
+  timer(function timer_1_callback() {
     writeToConsole('>>> timer#1 callback');
   }, 1000);
 
-  myTimeout(function timer_2_callback() {
+  timer(function timer_2_callback() {
     writeToConsole('>>> timer#2 callback');
   }, 2000);
 
-  Promise.resolve()
+  Promise.resolve() /* promise#1 */
     .then(function then_1_callback() {
       writeToConsole('>>> then#1 callback');
-    })
+    }) /* promise#2 */
     .then(function then_2_callback() {
       writeToConsole('>>> then#2 callback');
-    });
+    }) /* promise#3 */;
 
   writeToConsole('<<< main ending >>>');
 }

@@ -5,7 +5,8 @@ const DANCE_TIME_MS = 5000;
 const DANCING_CAT_URL =
   'https://media1.tenor.com/images/2de63e950fb254920054f9bd081e8157/tenor.gif';
 
-function walk(img, startPos, stopPos, stepInterval) {
+function walk(img, startPos, stopPos, stepInterval, catNum) {
+  console.log(`>>> cat#${catNum} walking`);
   return new Promise((resolve) => {
     let position = startPos;
     const intervalId = setInterval(() => {
@@ -19,7 +20,8 @@ function walk(img, startPos, stopPos, stepInterval) {
   });
 }
 
-function dance(img) {
+function dance(img, catNum) {
+  console.log(`>>> cat#${catNum} dancing`);
   return new Promise((resolve) => {
     const savedSrc = img.src;
     img.src = DANCING_CAT_URL;
@@ -42,15 +44,15 @@ function catWalk(catNum, top, stepInterval, rejectNum) {
   const centerPos = (window.innerWidth - imgWidth) / 2;
   const stopPos = window.innerWidth;
 
-  return walk(img, startPos, centerPos, stepInterval)
-    .then(() => dance(img))
-    .then(() => walk(img, centerPos, stopPos, stepInterval))
+  return walk(img, startPos, centerPos, stepInterval, catNum)
+    .then(() => dance(img, catNum))
+    .then(() => walk(img, centerPos, stopPos, stepInterval, catNum))
     .then(() => img.remove())
     .then(() => {
       if (catNum === rejectNum) {
-        throw `Cat-${catNum} rejects`;
+        throw `cat#${catNum} rejects`;
       }
-      return `Cat-${catNum} resolves`;
+      return `cat#${catNum} resolves`;
     });
 }
 
@@ -65,13 +67,14 @@ function createCatWalkPromises(numCats, rejectCat) {
   return promises;
 }
 
-const REJECT_CAT = -1; // E.g., change to 3 to reject Cat-3
+const REJECT_CAT = -1; // E.g., change to 3 to reject cat#3
 
 function catWalks() {
+  console.log('<<< catWalks start >>>');
   const promises = createCatWalkPromises(3, REJECT_CAT);
 
   // Try: .all, .allSettled, .any, .race
-  return Promise.all(promises)
+  const p = Promise.all(promises)
     .then((resolvedVal) => {
       beep();
       displayResult(catWalks, '.then()', resolvedVal);
@@ -81,6 +84,9 @@ function catWalks() {
       displayResult(catWalks, '.catch()', rejectedVal);
     })
     .then(catWalks);
+
+  console.log('<<< catWalks exit >>>');
+  return p;
 }
 
 document.querySelector('button').addEventListener('click', catWalks);

@@ -51,6 +51,7 @@ function catWalk(top, stepInterval, catNum) {
 }
 
 function catWalks() {
+  console.log('<<< catWalks start >>>');
   const promises = [];
   for (let i = 0; i < 3; i++) {
     const stepInterval = 20 - i * 3;
@@ -65,6 +66,8 @@ function catWalks() {
     .then(() => {
       catWalks();
     });
+
+  console.log('<<< catWalks exit >>>');
 }
 
 document.querySelector('button').addEventListener('click', catWalks);
