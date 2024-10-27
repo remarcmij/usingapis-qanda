@@ -1,41 +1,30 @@
 import { AsyncPromise as Promise } from '../lib/async-promise.js';
+import { setTimeoutWrapper as setTimeout } from './setTimeoutWrapper.js';
 
-let timerCount = 0;
-
-function writeToConsole(message) {
+function logToConsole(message) {
   console.log(message);
 }
 
-function timer(callback, delay) {
-  timerCount += 1;
-  console.log(`[timer#${timerCount} created]`);
-  setTimeout(() => {
-    console.log(`[timer#${timerCount} start]`);
-    callback();
-    console.log(`[timer#${timerCount} exit]`);
-  }, delay);
-}
-
 function main() {
-  writeToConsole('<<< main starting >>>');
+  logToConsole('<<< main starting >>>');
 
-  timer(function timer_1_callback() {
-    writeToConsole('>>> timer#1 callback');
+  setTimeout(function timeout1() {
+    logToConsole('>>> timeout#1');
   }, 1000);
 
-  timer(function timer_2_callback() {
-    writeToConsole('>>> timer#2 callback');
+  setTimeout(function timeout2() {
+    logToConsole('>>> timeout#2');
   }, 2000);
 
   Promise.resolve() /* promise#1 */
-    .then(function then_1_callback() {
-      writeToConsole('>>> then#1 callback');
+    .then(function onFulfilled1() /* then#1 */ {
+      logToConsole('>>> then#1');
     }) /* promise#2 */
-    .then(function then_2_callback() {
-      writeToConsole('>>> then#2 callback');
+    .then(function onFulfilled2() /* then#2 */ {
+      logToConsole('>>> then#2');
     }) /* promise#3 */;
 
-  writeToConsole('<<< main ending >>>');
+  logToConsole('<<< main ending >>>');
 }
 
 main();

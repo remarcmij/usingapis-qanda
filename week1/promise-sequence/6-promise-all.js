@@ -1,4 +1,4 @@
-import { AsyncPromise as Promise } from '../../async-promise/async-promise.js';
+import { AsyncPromise as Promise } from '../lib/async-promise.js';
 import { playlist } from './common.js';
 
 function playVideo({ episode, title, synopsis }) {

@@ -1,4 +1,4 @@
-function delay(time) {
+function timeoutPromise(time) {
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve();
@@ -6,4 +6,4 @@ function delay(time) {
   });
 }
 
-delay(1000).then(() => console.log('Hi'));
+timeoutPromise(1000).then(() => console.log('Hi'));
