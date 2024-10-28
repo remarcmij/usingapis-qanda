@@ -1,13 +1,8 @@
-'use strict';
-
 const STEP_SIZE_PX = 10;
 const STEP_INTERVAL_MS = 50;
 const DANCE_TIME_MS = 5000;
 const DANCING_CAT_URL =
   'https://media1.tenor.com/images/2de63e950fb254920054f9bd081e8157/tenor.gif';
-
-// Event to restart the loop
-const repeatEvent = new Event('repeat');
 
 function walk(img, startPos, stopPos) {
   return new Promise((resolve) => {

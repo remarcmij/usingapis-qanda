@@ -1,5 +1,3 @@
-'use strict';
-
 const STEP_INTERVAL_MS = 50;
 const DANCE_TIME_MS = 5000;
 const STEP_SIZE_PX = 10;

@@ -1,5 +1,3 @@
-'use strict';
-
 function catWalk() {
   const img = document.querySelector('img');
   const startPos = -img.width;
