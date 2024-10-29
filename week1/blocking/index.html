@@ -10,6 +10,10 @@
     />
     <title>Blocking</title>
     <style>
+      body {
+        font-family: apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+          'Helvetica Neue', Arial, sans-serif;
+      }
       button:active {
         background-color: red;
       }
@@ -48,6 +52,8 @@
         <h1 id="counter">0</h1>
       </div>
       <div class="buttons">
+        <input type="checkbox" id="blocking" name="blocking" />
+        <label for="blocking">Blocking</label>
         <button id="start">Start</button>
         <button id="stop">Stop</button>
       </div>

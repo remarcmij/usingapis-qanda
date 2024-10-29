@@ -10,12 +10,11 @@ function setTimeoutBlocking(callbackFn, time) {
 
 const setTimeoutNonBlocking = setTimeout;
 
-const BLOCKING = false;
-const setTimeoutFn = BLOCKING ? setTimeoutBlocking : setTimeoutNonBlocking;
+let setTimeoutFn;
 
 let isRunning = false;
 
-function countDown(count) {
+function timer(count) {
   if (!isRunning) {
     return;
   }
@@ -30,22 +29,27 @@ function countDown(count) {
   }
 
   setTimeoutFn(() => {
-    countDown(count - 1);
+    timer(count - 1);
   }, 1000);
 }
 
-function start() {
+function startTimer() {
   if (isRunning) {
     return;
   }
+
+  setTimeoutFn = document.querySelector('#blocking').checked
+    ? setTimeoutBlocking
+    : setTimeoutNonBlocking;
+
   isRunning = true;
-  countDown(10);
-  console.log('<<< start() exit >>>');
+  timer(10);
+  console.log('<<< startTimer has exited >>>');
 }
 
-function stop() {
+function stopTimer() {
   isRunning = false;
 }
 
-document.querySelector('#start').addEventListener('click', start);
-document.querySelector('#stop').addEventListener('click', stop);
+document.querySelector('#start').addEventListener('click', startTimer);
+document.querySelector('#stop').addEventListener('click', stopTimer);
