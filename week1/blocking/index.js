@@ -13,21 +13,17 @@ const setTimeoutFn = BLOCKING ? setTimeoutBlocking : setTimeoutNonBlocking;
 
 let isRunning = false;
 
-function runCounter(maxCount) {
-  const nextCount = (count) => {
-    if (count > maxCount || !isRunning) {
-      isRunning = false;
-      return;
-    }
+function countDown(count) {
+  if (count < 0 || !isRunning) {
+    isRunning = false;
+    return;
+  }
 
-    setTimeoutFn(() => {
-      console.log(count);
-      document.querySelector('#counter').textContent = count;
-      nextCount(count + 1);
-    }, 200);
-  };
-
-  nextCount(1);
+  setTimeoutFn(() => {
+    console.log(count);
+    document.querySelector('#counter').textContent = count;
+    countDown(count - 1);
+  }, 200);
 }
 
 function start() {
@@ -35,7 +31,7 @@ function start() {
     return;
   }
   isRunning = true;
-  runCounter(20);
+  countDown(20);
   console.log('<<< start exit >>>');
 }
 
