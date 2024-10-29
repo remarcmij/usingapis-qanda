@@ -1,3 +1,5 @@
+import { beepBeep } from '../lib/beep.js';
+
 function setTimeoutBlocking(callbackFn, time) {
   const endTime = Date.now() + time;
   while (Date.now() < endTime) {
@@ -14,16 +16,22 @@ const setTimeoutFn = BLOCKING ? setTimeoutBlocking : setTimeoutNonBlocking;
 let isRunning = false;
 
 function countDown(count) {
-  if (count < 0 || !isRunning) {
+  if (!isRunning) {
+    return;
+  }
+
+  console.log(count);
+  document.querySelector('#counter').textContent = count;
+
+  if (count === 0) {
+    beepBeep();
     isRunning = false;
     return;
   }
 
   setTimeoutFn(() => {
-    console.log(count);
-    document.querySelector('#counter').textContent = count;
     countDown(count - 1);
-  }, 200);
+  }, 1000);
 }
 
 function start() {
@@ -31,7 +39,7 @@ function start() {
     return;
   }
   isRunning = true;
-  countDown(20);
+  countDown(10);
   console.log('<<< start exit >>>');
 }
 

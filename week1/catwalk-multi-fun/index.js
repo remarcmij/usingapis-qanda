@@ -1,4 +1,5 @@
-import { beep, displayResult } from './helpers.js';
+import { displayResult } from './helpers.js';
+import { beep } from '../lib/beep.js';
 
 const STEP_SIZE_PX = 10;
 const DANCE_TIME_MS = 5000;
