@@ -1,4 +1,4 @@
-import { beepBeep } from '../lib/beep.js';
+import { beep } from '../lib/beep.js';
 
 function setTimeoutBlocking(callbackFn, time) {
   const endTime = Date.now() + time;
@@ -24,7 +24,7 @@ function countDown(count) {
   document.querySelector('#counter').textContent = count;
 
   if (count === 0) {
-    beepBeep();
+    beep();
     isRunning = false;
     return;
   }
@@ -40,7 +40,7 @@ function start() {
   }
   isRunning = true;
   countDown(10);
-  console.log('<<< start exit >>>');
+  console.log('<<< start() exit >>>');
 }
 
 function stop() {
