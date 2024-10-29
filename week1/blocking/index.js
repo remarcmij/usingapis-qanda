@@ -34,10 +34,9 @@ function start() {
   if (isRunning) {
     return;
   }
-  console.log('<<< main start >>>');
   isRunning = true;
   runCounter(20);
-  console.log('<<< main exit >>>');
+  console.log('<<< start exit >>>');
 }
 
 function stop() {
