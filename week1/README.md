@@ -8,6 +8,8 @@
 
 (Start recording!)
 
+- Blocking
+
 - Promise experiments
 
 - Event loop experiments in the browser debugger

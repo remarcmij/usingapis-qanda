@@ -13,20 +13,21 @@ const setTimeoutFn = BLOCKING ? setTimeoutBlocking : setTimeoutNonBlocking;
 
 let isRunning = false;
 
-function doTasks(taskCount) {
-  const doTask = (taskNum) => {
-    if (taskNum > taskCount || !isRunning) {
+function runCounter(maxCount) {
+  const nextCount = (count) => {
+    if (count > maxCount || !isRunning) {
       isRunning = false;
       return;
     }
 
     setTimeoutFn(() => {
-      console.log(`task#${taskNum}`);
-      doTask(taskNum + 1);
+      console.log(count);
+      document.querySelector('#counter').textContent = count;
+      nextCount(count + 1);
     }, 200);
   };
 
-  doTask(1);
+  nextCount(1);
 }
 
 function start() {
@@ -35,7 +36,7 @@ function start() {
   }
   console.log('<<< main start >>>');
   isRunning = true;
-  doTasks(20);
+  runCounter(20);
   console.log('<<< main exit >>>');
 }
 
