@@ -9,25 +9,26 @@ export async function fetchData(url) {
     throw new Error(`HTTP ${res.status}  ${res.statusText}`);
   }
 
-  return res.json();
+  const data = await res.json();
+  return { data, headers: res.headers };
 }
 
 export async function fetchCached(url) {
-  let data = cache[url];
-  if (data) {
-    return data;
+  let cacheItem = cache[url];
+  if (cacheItem) {
+    return cacheItem;
   }
 
-  data = await fetchData(url);
-  cache[url] = data;
+  cacheItem = await fetchData(url);
+  cache[url] = cacheItem;
 
-  return data;
+  return cacheItem;
 }
 
 export async function fetchSlowAndUnreliable(url) {
-  await new Promise((resolve) => setTimeout(resolve, 5000));
-  if (Math.random() < 0.4) {
-    throw new Error('Server is down');
-  }
+  await new Promise((resolve) => setTimeout(resolve, 1000));
+  // if (Math.random() < 0.4) {
+  //   throw new Error('Server is down');
+  // }
   return await fetchCached(url);
 }

@@ -26,13 +26,21 @@ export function createReposView(props) {
       </div>
     </div>
     <div id="list-container"></div>
+    <div class="button-container">
+      <button id="prev-btn">Previous</button>
+      <button id="next-btn">Next</button>
+    </div>
   `;
 
   const selectOrg = root.querySelector('#select-org');
   const loadingIndicator = root.querySelector('.loading-indicator');
   const listContainer = root.querySelector('#list-container');
+  const prevBtn = root.querySelector('#prev-btn');
+  const nextBtn = root.querySelector('#next-btn');
 
   selectOrg.addEventListener('change', props.onOrganizationChange);
+  prevBtn.addEventListener('click', props.onPrevPage);
+  nextBtn.addEventListener('click', props.onNextPage);
 
   const update = (state) => {
     selectOrg.value = state.organization;
@@ -62,6 +70,9 @@ export function createReposView(props) {
       });
       repoList.appendChild(listItemView.root);
     });
+
+    prevBtn.disabled = !state.hasPrev;
+    nextBtn.disabled = !state.hasNext;
   };
 
   return { root, update };

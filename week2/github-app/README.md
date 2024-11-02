@@ -21,7 +21,7 @@ index.html
 
 Figure 1 below gives a high-level overview of the core application architecture used throughout this demo app. We will refer to it as the **Page/View/State Model**. In its simplest form, an application following this architecture is made up of a Page object, a View object and a state object. All three objects are regular JavaScript objects.
 
-![page-view-state-model](../assets/page-view-state-model.png)<br>
+![page-view-state-model](../assets/page-view-state-model.png)  
 Figure 1: **The Page / View / State Model**
 
 ### 2.1. Application State Object
@@ -56,7 +56,7 @@ export function createXXXPage(state) {
   // Add code to update the View as needed here
 
   // Return the object returned by the View Factory Function. This is assumed
-  // to includethe required `.root` property.
+  // to include the required `.root` property.
   return xxxView;
 }
 ```
