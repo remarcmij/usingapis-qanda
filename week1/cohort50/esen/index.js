@@ -1,13 +1,15 @@
 function main() {
-  // Once create a promise WILL settle.
+  // Once created a promise WILL settle.
   const p = new Promise((resolve, reject) => {
     setTimeout(() => {
       resolve(42);
     }, 5000);
 
-    document
-      .querySelector('#reject-btn')
-      .addEventListener('click', () => reject(new Error('canceled')));
+    const rejectBtn = document.querySelector('#reject-btn');
+
+    rejectBtn.addEventListener('click', () => {
+      reject(new Error('canceled'));
+    });
   });
 
   const title = document.querySelector('#title');
