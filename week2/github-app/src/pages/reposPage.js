@@ -8,6 +8,7 @@ export function createReposPage(state) {
   let page = 1;
 
   const onOrganizationChange = (e) => {
+    page = 1;
     state = { ...state, organization: e.target.value };
     // Update the page based on the new organization value
     update();
