@@ -5,18 +5,19 @@ const intervalTimer = setInterval(() => {
 }, 1000);
 
 new Promise((resolve, reject) => {
-  setTimeout(
-    () => (Math.random() > 0.5 ? resolve(42) : reject(new Error('Oops'))),
-    2000 + Math.random() * 5000
-  );
+  setTimeout(() => {
+    if (Math.random() > 0.5) {
+      resolve(42);
+    } else {
+      reject(new Error('Oops'));
+    }
+  }, 2000 + Math.random() * 5000);
 })
   .then((result) => {
-    console.log('result', result);
-    return result;
+    console.log('result:', result);
   })
   .catch((err) => {
-    console.log('error', err.message);
-    return err;
+    console.log('error:', err.message);
   })
   .finally(() => {
     clearInterval(intervalTimer);
