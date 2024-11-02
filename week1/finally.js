@@ -1,18 +1,23 @@
-const timer = setTimeout(() => {
-  console.log('timed out');
+let count = 0;
+const intervalTimer = setInterval(() => {
+  count += 1;
+  console.log(count);
 }, 1000);
 
-// Create a resolved promise
-Promise.resolve('42')
+new Promise((resolve, reject) => {
+  setTimeout(
+    () => (Math.random() > 0.5 ? resolve(42) : reject(new Error('Oops'))),
+    2000 + Math.random() * 5000
+  );
+})
   .then((result) => {
-    console.log('then', result);
+    console.log('result', result);
     return result;
   })
   .catch((err) => {
-    console.log('catch', err);
+    console.log('error', err.message);
     return err;
   })
   .finally(() => {
-    console.log('finally');
-    clearTimeout(timer);
+    clearInterval(intervalTimer);
   });
