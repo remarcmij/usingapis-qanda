@@ -11,7 +11,7 @@ new Promise((resolve, reject) => {
     } else {
       reject(new Error('Oops'));
     }
-  }, 2000 + Math.random() * 5000);
+  }, 3000);
 })
   .then((result) => {
     console.log('result:', result);
