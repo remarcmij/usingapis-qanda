@@ -10,11 +10,11 @@ function main() {
 
   setTimeout(function timeout1() {
     logToConsole('>>> timeout#1');
-  }, 1000);
+  }, 0);
 
   setTimeout(function timeout2() {
     logToConsole('>>> timeout#2');
-  }, 2000);
+  }, 0);
 
   Promise.resolve() /* promise#1 */
     .then(function onFulfilled1() /* then#1 */ {

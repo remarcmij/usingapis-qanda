@@ -1,5 +1,5 @@
-import { displayResult } from './helpers.js';
 import { beep } from '../lib/beep.js';
+import { displayResult } from './helpers.js';
 
 const STEP_SIZE_PX = 10;
 const DANCE_TIME_MS = 5000;
@@ -72,10 +72,10 @@ const REJECT_CAT = -1; // E.g., change to 3 to reject cat#3
 
 function catWalks() {
   console.log('<<< catWalks start >>>');
-  const promises = createCatWalkPromises(3, REJECT_CAT);
+  const promises = createCatWalkPromises(5, REJECT_CAT);
 
   // Try: .all, .allSettled, .any, .race
-  const p = Promise.all(promises)
+  const p = Promise.race(promises)
     .then((resolvedVal) => {
       beep();
       displayResult(catWalks, '.then()', resolvedVal);

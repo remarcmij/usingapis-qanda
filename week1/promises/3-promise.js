@@ -13,3 +13,13 @@ const y = x
   });
 
 console.log(5, y);
+
+/*
+Ruba:
+
+3 Oops...
+4 Promise 
+
+5 Promise message
+
+*/

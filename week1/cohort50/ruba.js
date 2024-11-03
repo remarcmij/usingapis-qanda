@@ -1,45 +1,44 @@
 // import { AsyncPromise as Promise } from '../lib/async-promise.js';
 
-function createPromise(value) {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve(value);
-    }, value * 10);
-  });
-}
+const partsCatalog = {
+  nut: 0.02,
+  bolt: 0.05,
+  nail: 0.01,
+};
 
-function PromiseAll(promises) {
+function getPriceQuotation({ part, qty }) {
   return new Promise((resolve, reject) => {
-    const results = [];
-    let resolvedCount = 0;
-    for (const promise of promises) {
-      promise
-        .then((value) => {
-          results.push(value);
-          resolvedCount++;
-          if (resolvedCount === promises.length) {
-            resolve(results);
-          }
-        })
-        .catch((error) => {
-          reject(error);
-          return;
-        });
+    const unitPrice = partsCatalog[part];
+    if (unitPrice) {
+      resolve(unitPrice * qty);
+    } else {
+      reject(new Error(`Not in catalog: ${part}`));
     }
   });
 }
 
-function main() {
-  console.log('<<< main starting >>>');
-  const promises = [createPromise(10), createPromise(5), createPromise(12)];
-  PromiseAll(promises)
+function computeItemPrice(lineItems) {
+  const promises = lineItems.map((lineItem) => getPriceQuotation(lineItem));
+  return Promise.all(promises)
     .then((results) => {
-      console.log(results);
+      console.log('results', results);
+      return results.reduce((acc, price) => acc + price);
     })
-    .catch((error) => {
-      console.error(error);
+    .catch((err) => {
+      console.log('Error', err.message);
     });
-  console.log('<<< main ending >>>');
 }
 
-main();
+async function computeTotalPrice() {
+  const lineItems = [
+    { part: 'nut', qty: 100 },
+    { part: 'bolt', qty: 100 },
+    { part: 'nail', qty: 500 },
+  ];
+
+  const total = await computeItemPrice(lineItems);
+
+  console.log(`Total price of this order: EUR ${total}`);
+}
+
+computeTotalPrice();

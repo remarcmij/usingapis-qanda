@@ -15,10 +15,9 @@ new Promise((resolve, reject) => {
 })
   .then((result) => {
     console.log('result:', result);
+    clearInterval(intervalTimer);
   })
   .catch((err) => {
     console.log('error:', err.message);
-  })
-  .finally(() => {
     clearInterval(intervalTimer);
   });

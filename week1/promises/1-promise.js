@@ -10,3 +10,18 @@ const x = new Promise((resolve, reject) => {
 
 console.log(1, typeof x);
 console.log(2, x);
+
+/*
+Vlada:
+ 1 object
+ 2 Promise
+
+Abdulkader:
+  1 function
+  2 NaN
+
+Lya:
+  1 object
+  2 state
+ 
+ */

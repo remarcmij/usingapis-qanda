@@ -12,4 +12,17 @@ const y = x
     console.log(4, x);
   });
 
-console.log(5, y);
+y.then(() => {
+  console.log(5, y);
+});
+
+/* 
+Lidiia & Lya
+
+1 42
+2 Promise 42
+
+5 Promise ? 
+
+
+*/

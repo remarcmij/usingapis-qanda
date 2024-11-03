@@ -1,4 +1,4 @@
-function main() {
+function computeTotalPrice() {
   // Once created a promise WILL settle.
   const p = new Promise((resolve, reject) => {
     setTimeout(() => {
@@ -21,4 +21,4 @@ function main() {
   });
 }
 
-window.addEventListener('load', main);
+window.addEventListener('load', computeTotalPrice);
