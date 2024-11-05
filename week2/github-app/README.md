@@ -24,36 +24,50 @@ Figure 1 below gives a high-level overview of the core application architecture 
 ![page-view-state-model](../assets/page-view-state-model.png)  
 Figure 1: **The Page / View / State Model**
 
+Following the best practice principle of [Separation of Concerns](https://en.wikipedia.org/wiki/Separation_of_concerns), the Page object deals with handling UI events and network request and does not concern itself with DOM manipulation. Conversely, the View object is solely concerned with DOM manipulation and nothing else. The Page object communicates with the View object by sending it state updates, while the View object calls events handlers from the Page object.
+
 ### 2.1. Application State Object
 
-In the application `state` object all data that our application uses is held. This includes data fetched from an API, error information, user input, etc. This `state` object is shuttled between pages and updated within pages with results from fetches, user input, etc.
+In the application state is kept in a `state` object that holds all data that our application uses. This includes data fetched from an API, error information, user input, etc. This `state` object is shuttled between pages and updated within pages with results from fetches, user input, etc.
 
 ### 2.2. Page Object
 
-A `page` object is created by calling a Page Factory function. In this sample application there are two pages and two corresponding factory functions:
-
-| File                     | Page Factory Function |
-| ------------------------ | --------------------- |
-| `src/pages/reposPage.js` | `createReposPage()`   |
-| `src/pages/errorPage.js` | `createErrorPage()`   |
-
-A `page` object returned by a Page Factory Function should include a `root` property that holds root element of an HTML subtree that constitutes the HTML structure for the page. When the page is loaded this root element is appended to the `<div>` element with `id="page-root"` in the `index.html` file.
-
-The general structure of a Page Factory Function is as follows:
+A `page` object is created by calling a Page creation function (also know as a _factory_ function):
 
 ```js
 export function createXXXPage(state) {
+  ...
+}
+```
+
+In this sample application there are two pages and two corresponding factory functions:
+
+| File                     | Page Factory Function |
+| ------------------------ | --------------------- |
+| [`src/pages/reposPage.js`](./src/pages/reposPage.js) | `createReposPage()` |
+| [`src/pages/errorPage.js`](./src/pages/errorPage.js) | `createErrorPage()` |
+
+A `page` object returned by a Page Factory Function should include a `root` property that holds root element of an HTML subtree that constitutes the HTML structure for the page. When the page is loaded this root element is appended to the `<div>` element with `id="page-root"` in the `index.html` file.
+
+The general structure of a Page factory function as used in this repository is as follows:
+
+```js
+export function createXXXPage(state) {
+  // Event handler that is passed as a parameter to the corresponding View of
+  // this page.
   const onXXX = (e) => {
     // Handle the event initiated from an element of the HTML subtree of this
     // page.
-    ...
   };
 
   // Call the View Factory Function for this page, optionally passing event
   // handlers.
   const xxxView = createXXXView({ onXXX });
 
-  // Add code to update the View as needed here
+  // Add code to update the state object when the page is first loaded,
+  // e.g. by fetching initial data. With the updated state,
+  // call the update() function from the View object to let the View update
+  // itself.
 
   // Return the object returned by the View Factory Function. This is assumed
   // to include the required `.root` property.
