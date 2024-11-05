@@ -24,7 +24,7 @@ Figure 1 below gives a high-level overview of the core application architecture 
 ![page-view-state-model](../assets/page-view-state-model.png)  
 Figure 1: **The Page / View / State Model**
 
-Following the best practice principle of [Separation of Concerns](https://en.wikipedia.org/wiki/Separation_of_concerns), the Page object deals with handling UI events and network request and does not concern itself with DOM manipulation. Conversely, the View object is solely concerned with DOM manipulation and nothing else. The Page object communicates with the View object by sending it state updates, while the View object calls events handlers from the Page object.
+Following the best practice principle of [Separation of Concerns](https://en.wikipedia.org/wiki/Separation_of_concerns), the Page and View objects each take on different responsibilities. The Page object deals with handling UI events and network request and does not concern itself with DOM manipulation. Conversely, the View object is solely concerned with DOM manipulation and nothing else. The Page object communicates with the View object by sending it state updates, while the View object calls back events handlers passed to it from the Page object.
 
 ### 2.1. Application State Object
 
