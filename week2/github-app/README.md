@@ -21,14 +21,31 @@ index.html
 
 Figure 1 below gives a high-level overview of the core application architecture used throughout this demo app. We will refer to it as the **Page/View/State Model**. In its simplest form, an application following this architecture is made up of a Page object, a View object and a state object. All three objects are regular JavaScript objects.
 
-![page-view-state-model](../assets/page-view-state-model.png)  
+![page-view-state-model](../assets/page-view.png)  
 Figure 1: **The Page / View / State Model**
 
-Following the best practice principle of [Separation of Concerns](https://en.wikipedia.org/wiki/Separation_of_concerns), the Page and View objects each take on different responsibilities. The Page object deals with handling UI events and network request and does not concern itself with DOM manipulation. Conversely, the View object is solely concerned with DOM manipulation and nothing else. The Page object communicates with the View object by sending it state updates, while the View object calls back events handlers passed to it from the Page object.
+Following the best practice principle of [Separation of Concerns](https://en.wikipedia.org/wiki/Separation_of_concerns), the Page and View objects each take on different responsibilities.
+
+- The Page object deals with handling UI events and network request and does not concern itself with DOM manipulation.
+
+- Conversely, the View object is solely concerned with DOM manipulation and nothing else.
+
+- The Page object communicates with the View object by sending it state updates, while the View object calls back events handlers passed to it from the Page object.
 
 ### 2.1. Application State Object
 
 In the application state is kept in a `state` object that holds all data that our application uses. This includes data fetched from an API, error information, user input, etc. This `state` object is shuttled between pages and updated within pages with results from fetches, user input, etc.
+
+For the current example application the `state` object looks like this:
+
+```js
+const state = {
+  organization: 'HackYourFuture',
+  error: null,
+  loading: false,
+  repos: null,
+};
+```
 
 ### 2.2. Page Object
 
@@ -40,14 +57,14 @@ export function createXXXPage(state) {
 }
 ```
 
-In this sample application there are two pages and two corresponding factory functions:
+This sample application features two pages with two corresponding factory functions:
 
 | File                     | Page Factory Function |
 | ------------------------ | --------------------- |
 | [`src/pages/reposPage.js`](./src/pages/reposPage.js) | `createReposPage()` |
 | [`src/pages/errorPage.js`](./src/pages/errorPage.js) | `createErrorPage()` |
 
-A `page` object returned by a Page Factory Function should include a `root` property that holds root element of an HTML subtree that constitutes the HTML structure for the page. When the page is loaded this root element is appended to the `<div>` element with `id="page-root"` in the `index.html` file.
+A `page` object returned by a Page factory function should include a `root` property that holds root element of an HTML subtree that constitutes the HTML structure for the page. When the page is loaded this root element is appended to the `<div>` element with `id="page-root"` in the `index.html` file.
 
 The general structure of a Page factory function as used in this repository is as follows:
 
