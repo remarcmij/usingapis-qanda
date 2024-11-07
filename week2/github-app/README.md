@@ -50,8 +50,8 @@ const state = {
 | property | description |
 |----------|-------------|
 | `organization` | The GitHub organization. This can either be `HackYourFuture` or `HackYourAssignment`. |
-| `error` | Either an `Error` object, e.g. because of a `fetch()` error or `null` if there no error. |
-| `loading` | A boolean set to `true` just before starting a `fetch()` and reset to `false` when the `fetch()` completes (either successfully or unsuccessfully). This boolean is used to pop up a loading indicator during a `fetch()` to give the use a visual clue the application is momentarily busy and cannot continue until its work is completed. |
+| `error` | Either an `Error` object, e.g. because of a `fetch()` error or `null` if there is no error. |
+| `loading` | A boolean set to `true` just before starting a `fetch()` and reset to `false` when the `fetch()` completes (either successfully or unsuccessfully). This boolean is used to pop up a loading indicator during a `fetch()` to give the user a visual clue that the application is momentarily busy and cannot continue until its work is completed. |
 | `repos` | An array of objects from a `fetch()` to obtain repository information or `null` if the information is not (yet) available. |
 
 ### 2.2. Page Object
