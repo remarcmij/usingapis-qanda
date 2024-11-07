@@ -1,6 +1,6 @@
 import { createRepoListItemView } from './repoListItemView.js';
 
-export function createReposView(props) {
+export function createReposView(viewProps) {
   const root = document.createElement('div');
   root.className = 'repos-container';
   root.innerHTML = String.raw`
@@ -38,9 +38,9 @@ export function createReposView(props) {
   const prevBtn = root.querySelector('#prev-btn');
   const nextBtn = root.querySelector('#next-btn');
 
-  selectOrg.addEventListener('change', props.onOrganizationChange);
-  prevBtn.addEventListener('click', props.onPrevPage);
-  nextBtn.addEventListener('click', props.onNextPage);
+  selectOrg.addEventListener('change', viewProps.onOrganizationChange);
+  prevBtn.addEventListener('click', viewProps.onPrevPage);
+  nextBtn.addEventListener('click', viewProps.onNextPage);
 
   const update = (state) => {
     selectOrg.value = state.organization;
@@ -66,7 +66,7 @@ export function createReposView(props) {
     state.repos.forEach((repo) => {
       const listItemView = createRepoListItemView({
         repo,
-        onItemClick: props.onItemClick,
+        onItemClick: viewProps.onItemClick,
       });
       repoList.appendChild(listItemView.root);
     });

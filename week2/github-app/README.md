@@ -30,13 +30,13 @@ Following the best practice principle of [Separation of Concerns](https://en.wik
 
 - Conversely, the View object is solely concerned with DOM manipulation and nothing else.
 
-- The Page object communicates with the View object by sending it state updates, while the View object calls back events handlers passed to it from the Page object.
+- The Page object communicates with the View object by sending it state updates using the State object, while the View object calls back events handlers passed to it from the Page object.
 
 ### 2.1. Application State Object
 
-In the application state is kept in a `state` object that holds all data that our application uses. This includes data fetched from an API, error information, user input, etc. This `state` object is shuttled between pages and updated within pages with results from fetches, user input, etc.
+In the application, state is kept in a `state` object that holds all data that our application uses. This includes data fetched from an API, error information, user input, etc. This `state` object is shuttled between pages and updated within pages with results from fetches, user input, etc. The updated `state` object is communicated from a Page object to its corresponding View object so that the latter can apply the state changes to the DOM.
 
-For the current example application the `state` object looks like this:
+For the current GitHub example application the `state` object looks like this:
 
 ```js
 const state = {
@@ -46,6 +46,13 @@ const state = {
   repos: null,
 };
 ```
+
+| property | description |
+|----------|-------------|
+| `organization` | The GitHub organization. This can either be `HackYourFuture` or `HackYourAssignment`. |
+| `error` | Either an `Error` object, e.g. because of a `fetch()` error or `null` if there no error. |
+| `loading` | A boolean set to `true` just before starting a `fetch()` and reset to `false` when the `fetch()` completes (either successfully or unsuccessfully). This boolean is used to pop up a loading indicator during a `fetch()` to give the use a visual clue the application is momentarily busy and cannot continue until its work is completed. |
+| `repos` | An array of objects from a `fetch()` to obtain repository information or `null` if the information is not (yet) available. |
 
 ### 2.2. Page Object
 
@@ -64,7 +71,7 @@ This sample application features two pages with two corresponding factory functi
 | [`src/pages/reposPage.js`](./src/pages/reposPage.js) | `createReposPage()` |
 | [`src/pages/errorPage.js`](./src/pages/errorPage.js) | `createErrorPage()` |
 
-A `page` object returned by a Page factory function should include a `root` property that holds root element of an HTML subtree that constitutes the HTML structure for the page. When the page is loaded this root element is appended to the `<div>` element with `id="page-root"` in the `index.html` file.
+A `page` object returned by a Page factory function should include a `root` property that holds root element of its `view` object. When the page is loaded this root element is appended to the `<div>` element with `id="page-root"` in the `index.html` file.
 
 The general structure of a Page factory function as used in this repository is as follows:
 
@@ -105,21 +112,21 @@ export function loadPage(pageFactoryFn, state) {
 }
 ```
 
-As you can see, the `loadPage()` function takes two parameters, a Page Factory Function and a `state` object. This is what happens when `loadPage()` is called:
+As you can see, the `loadPage()` function takes two parameters, a Page factory function and a `state` object. This is what happens when `loadPage()` is called:
 
 1. It gets a reference to the `<div>` with `id="app-root` hard-coded in the `index.html` file.
 2. It clears out the previous `innerHTML` content from a previous page (if any).
-3. It calls the Page Factory Function that was passed as its first parameter and passes the `state` object from the second parameter to the page factory function. The function is expected to return a JavaScript object that includes the `.root` property mentioned previously.
+3. It calls the Page factory function that was passed as its first parameter and passes the `state` object from the second parameter to the page factory function. The function is expected to return a JavaScript object that includes the `.root` property mentioned previously.
 4. It appends the HTML subtree represented by the `.root` property to `<div id="app-root">`. This effectively "mounts" the page in the DOM.
 
 ### 2.3 View Object
 
-A Page Factory Function is not responsible for creating the HTML subtree for the page. This task is handed off to a View Factory Function:
+A Page Factory Function is not responsible for creating the HTML subtree for the page. This task is handed off to a View factory function:
 
 | File                     | View factory function |
 | ------------------------ | --------------------- |
-| `src/views/reposView.js` | `createReposView()`   |
-| `src/views/errorView.js` | `createErrorView()`   |
+| [`src/views/reposView.js`](./src/views/reposView.js) | `createReposView()`   |
+| [`src/views/errorView.js`](./src/views/errorView.js) | `createErrorView()`   |
 
 The general structure of a View Factory Function would look like this:
 
@@ -159,15 +166,15 @@ export function createXXXView(props) {
 
 ## 2.4 Updating the `state` object
 
-It is customary to update the `state` object by creating a new `state` object derived from the current state object, rather than by mutating the properties of an existing state directly. You will see this technique a lot later during the React module. Here is an example:
+It is customary to update the `state` object by creating a new `state` object derived from the current state object, rather than by changing the properties of an existing `state` object directly. You will see this technique a lot later during the React module. Here is an example:
 
 ```js
 state = { ...state, loading: true };
 ```
 
-A new object is created by spreading out the existing state into that object and then explicitly adding or overwriting properties. In this example the `loading` property will be overwritten if it exists already; otherwise it will be added to the new state object.
+A new object is created by spreading out the existing `state` into that object and then explicitly adding or overwriting properties. In this example the `loading` property from the existing `state` will be overwritten if it exists already; otherwise it will be added to the new `state` object.
 
-## 2.5 Error Handling and Load Indicator
+## 2.5 Error Handling and Loading Indicator
 
 The comments in the following code snippet taken from the `createReposPage()` function demonstrates how the `state` object can be used to "control" the behaviour of the application during network requests.
 

@@ -1,5 +1,5 @@
 import { API_BASE_URL } from '../constants.js';
-import { fetchSlowAndUnreliable as fetchSlowAndUnreliably } from '../util/fetchData.js';
+import { fetchSlowAndUnreliably } from '../util/fetchData.js';
 import { loadPage } from '../util/loadPage.js';
 import { createReposView } from '../views/reposView.js';
 import { createErrorPage } from './errorPage.js';
@@ -24,11 +24,13 @@ export function createReposPage(state) {
     update();
   };
 
-  const reposView = createReposView({
+  const viewProps = {
     onOrganizationChange,
     onNextPage,
     onPrevPage,
-  });
+  };
+
+  const reposView = createReposView(viewProps);
 
   const update = async () => {
     try {

@@ -1,6 +1,13 @@
 {
   "markdown-preview-github-styles.colorTheme": "light",
-  "cSpell.words": ["endregion", "macrotask", "Milli", "Millisecs", "pokemons"],
+  "cSpell.words": [
+    "endregion",
+    "macrotask",
+    "Milli",
+    "Millisecs",
+    "pokemons",
+    "whiteframe"
+  ],
   "code-runner.clearPreviousOutput": true,
   "code-runner.saveFileBeforeRun": true,
   "code-runner.showExecutionMessage": false,

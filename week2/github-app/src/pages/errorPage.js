@@ -7,5 +7,10 @@ export function createErrorPage(state) {
     loadPage(createReposPage, state);
   };
 
-  return createErrorView({ error: state.error, onRetry });
+  const viewProps = {
+    error: state.error,
+    onRetry,
+  };
+
+  return createErrorView(viewProps);
 }
