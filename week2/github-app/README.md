@@ -43,7 +43,7 @@ const state = {
   organization: 'HackYourFuture',
   error: null,
   loading: false,
-  repos: null,
+  data: null,
 };
 ```
 
@@ -52,7 +52,7 @@ const state = {
 | `organization` | The GitHub organization. This can either be `HackYourFuture` or `HackYourAssignment`. |
 | `error` | Either an `Error` object, e.g. because of a `fetch()` error or `null` if there is no error. |
 | `loading` | A boolean set to `true` just before starting a `fetch()` and reset to `false` when the `fetch()` completes (either successfully or unsuccessfully). This boolean is used to pop up a loading indicator during a `fetch()` to give the user a visual clue that the application is momentarily busy and cannot continue until its work is completed. |
-| `repos` | An array of objects from a `fetch()` to obtain repository information or `null` if the information is not (yet) available. |
+| `data` | An array of objects from a `fetch()` to obtain repository information or `null` if the information is not (yet) available. |
 
 ### 2.2. Page Object
 
@@ -182,7 +182,7 @@ The comments in the following code snippet taken from the `createReposPage()` fu
 try {
   // Update the View so that a loading indicator is shown while
   // data is being fetched.
-  state = { ...state, error: null, loading: true, repos: null };
+  state = { ...state, error: null, loading: true, data: null };
   reposView.update(state);
 
   const url = `${API_BASE_URL}/orgs/${state.organization}/repos?per_page=100`;
@@ -191,7 +191,7 @@ try {
 
   // Update the View to hide the loading indicator and update the View
   // with the fetched data.
-  state = { ...state, repos, loading: false };
+  state = { ...state, data: repos, loading: false };
   reposView.update(state);
 } catch (error) {
   // Update the state with the error information and load the Error Page

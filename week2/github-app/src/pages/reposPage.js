@@ -36,7 +36,7 @@ export function createReposPage(state) {
     try {
       // Update the View so that a loading indicator is shown while
       // data is being fetched.
-      state = { ...state, error: null, loading: true, repos: null };
+      state = { ...state, error: null, loading: true, data: null };
       reposView.update(state);
 
       const url = `${API_BASE_URL}/orgs/${state.organization}/repos?per_page=5&page=${page}`;
@@ -51,7 +51,7 @@ export function createReposPage(state) {
       // with the fetched data.
       state = {
         ...state,
-        repos: data,
+        data,
         loading: false,
         hasPrev: !!prevItem,
         hasNext: !!nextItem,
