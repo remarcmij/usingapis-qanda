@@ -39,12 +39,13 @@ In the application, state is kept in a `state` object that holds all data that o
 For the current GitHub example application the `state` object looks like this:
 
 ```js
-const state = {
-  organization: 'HackYourFuture',
-  error: null,
-  loading: false,
-  data: null,
-};
+  const state = {
+    organization: 'HackYourFuture',
+    error: null,
+    loading: false,
+    data: null,
+    page: 1,
+  };
 ```
 
 | property | description |
@@ -53,6 +54,7 @@ const state = {
 | `error` | Either an `Error` object, e.g. because of a `fetch()` error or `null` if there is no error. |
 | `loading` | A boolean set to `true` just before starting a `fetch()` and reset to `false` when the `fetch()` completes (either successfully or unsuccessfully). This boolean is used to pop up a loading indicator during a `fetch()` to give the user a visual clue that the application is momentarily busy and cannot continue until its work is completed. |
 | `data` | An array of objects from a `fetch()` to obtain repository information or `null` if the information is not (yet) available. |
+| `page` | Data is fetched in this example in 'pages' of 5 repositories at a time (i.e. using pagination). This property hold the current page number. |
 
 ### 2.2. Page Object
 
@@ -187,7 +189,6 @@ try {
 
   const url = `${API_BASE_URL}/orgs/${state.organization}/repos?per_page=100`;
   const repos = await fetchData(url);
-  repos.sort((a, b) => a.name.localeCompare(b.name));
 
   // Update the View to hide the loading indicator and update the View
   // with the fetched data.

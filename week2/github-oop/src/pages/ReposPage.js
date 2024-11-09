@@ -11,7 +11,6 @@ export default class ReposPage {
 
   constructor(state) {
     this.#state = state;
-    this.#page = 1;
 
     const viewProps = {
       onOrganizationChange: this.onOrganizationChange,
@@ -29,18 +28,18 @@ export default class ReposPage {
 
   onOrganizationChange = (e) => {
     this.#page = 1;
-    this.#state = { ...this.#state, organization: e.target.value };
+    this.#state = { ...this.#state, organization: e.target.value, page: 1 };
     // Update the page based on the new organization value
     this.update();
   };
 
   onNextPage = () => {
-    this.#page += 1;
+    this.#state = { ...this.#state, page: this.#state.page + 1 };
     this.update();
   };
 
   onPrevPage = () => {
-    this.#page -= 1;
+    this.#state = { ...this.#state, page: this.#state.page - 1 };
     this.update();
   };
 
@@ -48,12 +47,12 @@ export default class ReposPage {
     try {
       // Update the View so that a loading indicator is shown while
       // data is being fetched.
-      this.#state = { ...this.#state, error: null, loading: true, repos: null };
+      this.#state = { ...this.#state, error: null, loading: true, data: null };
       this.#view.update(this.#state);
 
       const url = `${API_BASE_URL}/orgs/${
         this.#state.organization
-      }/repos?per_page=5&page=${this.#page}`;
+      }/repos?per_page=5&page=${this.#state.page}`;
       const { data, headers } = await fetchSlowAndUnreliably(url);
 
       // Check whether there is a next and/or a prev page to go to
@@ -65,7 +64,7 @@ export default class ReposPage {
       // with the fetched data.
       this.#state = {
         ...this.#state,
-        repos: data,
+        data: data,
         loading: false,
         hasPrev: !!prevItem,
         hasNext: !!nextItem,

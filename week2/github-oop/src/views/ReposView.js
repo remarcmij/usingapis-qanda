@@ -67,7 +67,7 @@ export default class ReposView {
     this.#loadingIndicator.classList.add('hide');
 
     // Do not render if there is an error or if there is no data yet.
-    if (state.error || !state.repos) {
+    if (state.error || !state.data) {
       return;
     }
     // clear loading indicator
@@ -77,7 +77,7 @@ export default class ReposView {
     repoList.className = 'no-bullets';
     this.#listContainer.appendChild(repoList);
 
-    state.repos.forEach((repo) => {
+    state.data.forEach((repo) => {
       const listItemView = new ReposListViewItem({
         repo,
         onItemClick: this.#viewProps.onItemClick,

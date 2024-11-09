@@ -5,22 +5,19 @@ import { createReposView } from '../views/reposView.js';
 import { createErrorPage } from './errorPage.js';
 
 export function createReposPage(state) {
-  let page = 1;
-
   const onOrganizationChange = (e) => {
-    page = 1;
-    state = { ...state, organization: e.target.value };
     // Update the page based on the new organization value
+    state = { ...state, organization: e.target.value, page: 1 };
     update();
   };
 
   const onNextPage = () => {
-    page += 1;
+    state = { ...state, page: state.page + 1 };
     update();
   };
 
   const onPrevPage = () => {
-    page -= 1;
+    state = { ...state, page: state.page - 1 };
     update();
   };
 
@@ -39,7 +36,7 @@ export function createReposPage(state) {
       state = { ...state, error: null, loading: true, data: null };
       reposView.update(state);
 
-      const url = `${API_BASE_URL}/orgs/${state.organization}/repos?per_page=5&page=${page}`;
+      const url = `${API_BASE_URL}/orgs/${state.organization}/repos?per_page=5&page=${state.page}`;
       const { data, headers } = await fetchSlowAndUnreliably(url);
 
       // Check whether there is a next and/or a prev page to go to

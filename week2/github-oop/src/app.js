@@ -6,7 +6,8 @@ function loadApp() {
     organization: 'HackYourFuture',
     error: null,
     loading: false,
-    repos: null,
+    data: null,
+    page: 1,
   };
   loadPage(ReposPage, state);
 }

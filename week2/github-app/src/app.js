@@ -7,6 +7,7 @@ function loadApp() {
     error: null,
     loading: false,
     data: null,
+    page: 1,
   };
   loadPage(createReposPage, state);
 }
