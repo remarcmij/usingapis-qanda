@@ -22,7 +22,7 @@ function renderError(err) {
   root.appendChild(h1);
 }
 
-async function getPoko() {
+async function getPokemons() {
   try {
     const jsonData = await fetchData(EXAMPLE_API);
     renderData(jsonData);
@@ -31,4 +31,4 @@ async function getPoko() {
   }
 }
 
-window.addEventListener('load', getPoko);
+window.addEventListener('load', getPokemons);

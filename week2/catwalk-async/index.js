@@ -1,19 +1,32 @@
+'use strict';
+
 const STEP_INTERVAL_MS = 50;
 const STEP_SIZE_PX = 10;
 const DANCE_TIME_MS = 5000;
 const DANCING_CAT_URL =
   'https://media1.tenor.com/images/2de63e950fb254920054f9bd081e8157/tenor.gif';
 
-function walk(img, startPos, stopPos) {
+function wait(ms) {
   return new Promise((resolve) => {
-    // Copy over the implementation from last week
+    setTimeout(resolve, ms);
   });
 }
 
-function dance(img) {
-  return new Promise((resolve) => {
-    // Copy over the implementation from last week
-  });
+async function walk(img, startPos, stopPos) {
+  // img.style.left = startPos + 'px';
+  let currentLeftPos = startPos;
+
+  while (currentLeftPos <= stopPos) {
+    currentLeftPos = currentLeftPos + STEP_SIZE_PX;
+    img.style.left = currentLeftPos + 'px';
+    await wait(STEP_INTERVAL_MS);
+  }
+}
+
+async function dance(img) {
+  img.src = DANCING_CAT_URL;
+  await wait(DANCE_TIME_MS);
+  img.src = 'http://www.anniemation.com/clip_art/images/cat-walk.gif';
 }
 
 async function catWalk() {
@@ -22,7 +35,11 @@ async function catWalk() {
   const centerPos = (window.innerWidth - img.width) / 2;
   const stopPos = window.innerWidth;
 
-  // Use async/await syntax to loop the walk and dance functions
+  for (;;) {
+    await walk(img, startPos, centerPos);
+    await dance(img);
+    await walk(img, centerPos, stopPos);
+  }
 }
 
 window.addEventListener('load', catWalk);

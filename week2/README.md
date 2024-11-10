@@ -126,6 +126,8 @@ Ontzettend bedankt!
 
     An [`AbortController`](https://developer.mozilla.org/en-US/docs/Web/API/AbortController) to abort a `fetch()`. When a `fetch()` is aborted the promise returned by `fetch()` is rejected (which effectively settles the promise rather than cancelling it).
 
+    Example using `AbortController`: [fetch-abort/app.js](./fetch-abort/app.js)
+
 ### Dalia Saeed
 
 How can we handle CORS errors when working with third-party APIs?
@@ -142,4 +144,4 @@ Answer: We will deal with this extensively during the Q&A.
 
 Why is it beneficial to use try/catch when working with async/await functions?
 
-Answer: It is not beneficial: it is essential because we **_must_** handle errors.
+Answer: It is not _beneficial_: it is _essential_ because we **_must_** handle errors.
