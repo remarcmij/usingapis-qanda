@@ -98,8 +98,13 @@ See: [await Description](https://developer.mozilla.org/en-US/docs/Web/JavaScript
 
 ### Ruba Hasan
 
-1.What is the difference between PUT and PATCH?
-2.How can we improve the speed of fetching and displaying data in the browser?
+1. What is the difference between PUT and PATCH?
+
+    Answer: This topic is covered in the next module: NodeJS. However, the short answer is that PUT is used to completely _replace_ an existing entity in the backend, while PATCH is used to modify elements on an existing entity.
+
+2. How can we improve the speed of fetching and displaying data in the browser?
+
+    Answer: Fetch smaller chunks at a time, e.g. through pagination or infinite scrolling
 
 ### Liya Oz
 
