@@ -8,8 +8,6 @@ function setTimeoutBlocking(callbackFn, time) {
   callbackFn();
 }
 
-const setTimeoutNonBlocking = setTimeout;
-
 let setTimeoutFn;
 
 let isRunning = false;
@@ -40,7 +38,7 @@ function startTimer() {
 
   setTimeoutFn = document.querySelector('#blocking').checked
     ? setTimeoutBlocking
-    : setTimeoutNonBlocking;
+    : setTimeout;
 
   isRunning = true;
   timer(10);
