@@ -96,6 +96,8 @@ fetch("https://randomuser.me/api1")
 
 Can we call both of  resolve() and reject() in a Promise? Which one will the Promise settle with?
 
+A: You can call `resolve()` and `reject()` many times, but the first call (either to `resolve()` or `reject()`) settles the promise. After that, subsequent calls have no effect.
+
 ### Rizan ibrahim
 
 Why we use the return with promises since we are calling the function within then , just like we are calling the callback?!
