@@ -1,28 +1,17 @@
-const x = new Promise((resolve, reject) => {
+const promise = new Promise((resolve, reject) => {
   resolve(42);
 });
 
-const y = x
+const foo = promise
   .then((result) => {
     console.log(1, result);
-    console.log(2, x);
+    console.log(2, promise);
   })
   .catch((err) => {
     console.log(3, err.message);
-    console.log(4, x);
+    console.log(4, promise);
   });
 
-y.then(() => {
-  console.log(5, y);
+foo.then(() => {
+  console.log(5, foo);
 });
-
-/* 
-Lidiia & Lya
-
-1 42
-2 Promise 42
-
-5 Promise ? 
-
-
-*/
