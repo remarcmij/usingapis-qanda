@@ -147,4 +147,4 @@ A: See my answer to the question of Samira.
 
 What if we created a promise and it gets rejected on the first attempt, but we would like to make a few more retries? What is the best way to implement it? Just calling a function for a few times doesn’t feel like the best approach
 
-A: A promise cannot be retried: once it is settled its outcome is immutable (cannot be changed). To retry, you can create a new promise for the same underlying asynchronous process to be retried. See the example in the cohort51 folder [here](./cohort51/glib.js).
+A: A promise cannot be retried: once it is settled its outcome is immutable (cannot be changed). To retry, you can create a new promise for the same underlying asynchronous process to be retried. See the examples in the `week1/cohort51` folder.
