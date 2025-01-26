@@ -1,8 +1,7 @@
 async function fakeFetch() {
-  // Simulate rolling a die with a promise
   return new Promise((resolve, reject) => {
     setTimeout(() => {
-      if (Math.random() < 0.3) {
+      if (Math.random() < 0.2) {
         resolve({ cohort: 51 });
       } else {
         reject(new Error('fetch failed'));
@@ -12,20 +11,23 @@ async function fakeFetch() {
 }
 
 async function fetchData(retries = 3) {
-  while (retries > 0) {
+  let error;
+  while (retries >= 0) {
     try {
+      console.log('fetching...');
       return await fakeFetch();
-    } catch (error) {
-      console.log(`Retrying... (${retries} attempts left)`);
+    } catch (err) {
+      error = err;
+      console.log(`retrying... (${retries} attempts left)`);
       retries--;
     }
   }
-  throw new Error('fetch failed');
+  throw error;
 }
 
 try {
   const value = await fetchData();
-  console.log('Data', value);
+  console.log('data', value);
 } catch (error) {
-  console.error(`Error: ${error.message}`);
+  console.error(`error: ${error.message}`);
 }
