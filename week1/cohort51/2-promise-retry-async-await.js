@@ -1,4 +1,4 @@
-async function fakeFetch() {
+function fakeFetch() {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       if (Math.random() < 0.2) {
