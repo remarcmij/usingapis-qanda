@@ -75,7 +75,7 @@ function catWalks() {
   const promises = createCatWalkPromises(5, REJECT_CAT);
 
   // Try: .all, .allSettled, .any, .race
-  const p = Promise.race(promises)
+  const p = Promise.all(promises)
     .then((resolvedVal) => {
       beep();
       displayResult(catWalks, '.then()', resolvedVal);
