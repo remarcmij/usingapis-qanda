@@ -16,6 +16,8 @@
   - fetch
   - JSON
 
+Exercise ex2 output order
+
 1. Async/await experiments
 2. Catwalk async/await prep exercise
 3. Error handling discussion
