@@ -42,7 +42,7 @@ More event loop videos:
 
 How can we cancel a Promise after creating it? Should we always resolve/reject it? What is the best way to test this to see they are working as we expected?
 
-A: You cannot cancel a promise. You can choose to ignore its outcome. Or you can try to abort the underlying asynchronous process that the promise monitors and let it reject the promise. 
+A: You cannot cancel a promise. You can choose to ignore its outcome. Or you can try to abort the underlying asynchronous process that the promise monitors and let it reject the promise.
 
 A promise can only be in one of three states: `pending`, `fulfilled` or `rejected`. There is no `cancelled` state.
 

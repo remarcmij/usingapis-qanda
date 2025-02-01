@@ -1,5 +1,30 @@
 const cache = {};
 
+export async function fetchStream(url) {
+  const res = await fetch(url, {
+    headers: { accept: 'application/vnd.github+json' },
+  });
+  const reader = res.body.getReader();
+  const decoder = new TextDecoder();
+  let result = '';
+
+  let count = 0;
+
+  async function read() {
+    count += 1;
+    const { done, value } = await reader.read();
+    if (done) {
+      console.log(`Stream completed in ${count} requests.`);
+      return;
+    }
+    result += decoder.decode(value, { stream: true });
+    read();
+  }
+
+  await read();
+  return { data: JSON.parse(result), headers: res.headers };
+}
+
 export async function fetchData(url) {
   const res = await fetch(url, {
     headers: { accept: 'application/vnd.github+json' },
