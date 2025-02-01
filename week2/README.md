@@ -90,13 +90,13 @@ If a network request depends on data from a previous request then you need to do
 
 ### Konjit
 
-Since SPAs(Single Page Applications) rely heavily on JS running  in our browser doesn't that introduce security risks for example  when storing  data like credentials for authentications  in localStorage? Also given the frequent API requests made by SPAs, how can we prevent security issues during communication with those APIs like API leakage, Man in the Middle Attack? (edited)
+Q: Since SPAs(Single Page Applications) rely heavily on JS running  in our browser doesn't that introduce security risks for example  when storing  data like credentials for authentications  in localStorage? Also given the frequent API requests made by SPAs, how can we prevent security issues during communication with those APIs like API leakage, Man in the Middle Attack? (edited)
 
 A: This is topic is covered in the next module: NodeJS. But briefly:
 
-Q: Credentials (e.g. user name, password) should never be stored in `localStorage`. Instead you can store a token that the backend provides after signing in. You can, for instance, sign in using user name and password. For this to be secure the backend should use encrypted communication, i.e. HTTPS. The provided token can be stored in localStorage and expires after a predetermined time. The token must be sent along with each request (usually in a request header) to authenticate the request. This again should use HTTPS for extra protection.
+Credentials (e.g. user name, password) should never be stored in `localStorage`. Instead you can store a token that the backend provides after signing in. You can, for instance, sign in using user name and password. For this to be secure the backend should use encrypted communication, i.e. HTTPS. The provided token can be stored in localStorage and expires after a predetermined time. The token must be sent along with each request (usually in a request header) to authenticate the request. This again should use HTTPS for extra protection.
 
-Note that the token is encrypted in a one-way fashionand signed by the backend:
+Note that the token is encrypted in a one-way fashion and is signed by the backend:
 
 1. You cannot reconstruct user name and password from the token.
 2. You can not tamper with the token as this will invalidate the signature that the backend checks.
@@ -176,7 +176,13 @@ A: This topic is out-of-scope for this module (ask again in NodeJS module).
 
 ### Rizan ibrahim
 
-How can you set custom headers in both fetch() and Axios?  What are the advantages of using Axios over fetch()? (edited)
+Q: How can you set custom headers in both fetch() and Axios?  What are the advantages of using Axios over fetch()? (edited)
+
+A: Axios is a JavaScript library that support promises and uses `XMLHttpRequest` internally when used client-side (i.e. in a browser app).(Note that axios also be used in NodeJS). The native promise-based `fetch()` API became available later.
+
+Axios provides a wide range of options that you actually don't need for the majority of applications. Now that `fetch()` is natively available there is no real need for something like axios.
+
+See alse `xml-axios-fetch` example.
 
 ### Glib S
 
