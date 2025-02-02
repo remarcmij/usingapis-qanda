@@ -54,8 +54,8 @@ export async function fetchSlowAndUnreliably(url) {
   // Exaggerate the slowness of the server/network by delaying for 1 second
   await new Promise((resolve) => setTimeout(resolve, 1000));
 
-  // Exaggerate the flakiness of the server by failing 25% of the time
-  if (Math.random() < 0.25) {
+  // Exaggerate the flakiness of the server by failing some of the time
+  if (Math.random() < 0.5) {
     throw new Error('Server is down');
   }
 
