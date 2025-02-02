@@ -27,7 +27,9 @@ export async function fetchStream(url) {
 
 export async function fetchData(url) {
   const res = await fetch(url, {
-    headers: { accept: 'application/vnd.github+json' },
+    headers: {
+      accept: 'application/vnd.github+json',
+    },
   });
 
   if (!res.ok) {
@@ -55,7 +57,7 @@ export async function fetchSlowAndUnreliably(url) {
   await new Promise((resolve) => setTimeout(resolve, 1000));
 
   // Exaggerate the flakiness of the server by failing some of the time
-  if (Math.random() < 0.5) {
+  if (Math.random() < 0.25) {
     throw new Error('Server is down');
   }
 

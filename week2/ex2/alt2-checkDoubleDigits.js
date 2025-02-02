@@ -1,4 +1,4 @@
-import { AsyncPromise as Promise } from './async-promise.js';
+// import { AsyncPromise as Promise } from './async-promise.js';
 
 export function checkDoubleDigits(number) {
   return new Promise((resolve, reject) => {

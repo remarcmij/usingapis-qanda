@@ -20,7 +20,7 @@ async function logWithDelay2() {
   console.log('End of function');
 }
 
-function logWithDelay3() {
+async function logWithDelay3() {
   console.log('Start of function');
 
   let promise = Promise.resolve();
@@ -37,9 +37,9 @@ function logWithDelay3() {
     );
   });
 
-  promise.then(() => console.log('Promises done'));
+  await promise; //.then(() => console.log('Promises done'));
 
   console.log('End of function');
 }
 
-logWithDelay1();
+logWithDelay3();

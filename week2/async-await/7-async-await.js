@@ -1,5 +1,6 @@
 async function foo() {
   throw new Error('Oops, something went wrong...');
+  // return Promise.reject(new Error('Oops, something went wrong...'));
 }
 
 async function bar() {

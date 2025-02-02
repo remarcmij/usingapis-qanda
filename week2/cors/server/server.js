@@ -11,7 +11,7 @@ app.use((req, res, next) => {
 app.get('/pokemons', (req, res) => {
   res.sendFile('/pokemons.json', {
     root: '.',
-    headers: { Contenttype: 'application/json' },
+    headers: { ContentType: 'application/json' },
   });
 });
 
