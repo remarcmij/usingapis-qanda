@@ -46,6 +46,8 @@ export async function fetchCached(url) {
     return cacheItem;
   }
 
+  // Uncomment line 50 and comment out line 51 to try out ReadableStream
+  // cacheItem = await fetchStream(url);
   cacheItem = await fetchData(url);
   cache[url] = cacheItem;
 
