@@ -44,7 +44,7 @@ function watchdogTimer(secs) {
 function main() {
   const workers = [];
 
-  // Create 5 promises
+  // Create cancellable worker promises
   for (let i = 1; i <= 5; i++) {
     const [promise, cancelFn] = cancellableWorker(i);
     const worker = { promise, cancelFn };
@@ -58,13 +58,18 @@ function main() {
     workers.push(worker);
   }
 
+  // Create cancellable watchdog promise
   const [watchdogPromise, watchdogCancel] = watchdogTimer(6);
 
+  // Wait for all worker promises to resolve.
+  // If they do, cancel the watchdog timer.
   Promise.all(workers.map((worker) => worker.promise)).then((results) => {
     watchdogCancel();
     console.log('normal results', results);
   });
 
+  // Wait for the watchdog promise to settle (i.e. reject).
+  // If the watchdog fires cancel all active workers.
   watchdogPromise.catch(() => {
     workers.forEach((worker) => worker.cancelFn());
     const results = workers.map((worker) => worker.result);
