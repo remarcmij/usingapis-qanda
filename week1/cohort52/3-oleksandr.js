@@ -1,9 +1,11 @@
+const WATCHDOG_TIMEOUT_SECS = 3;
+
 function cancellableWorker(secs) {
   let timerId = null;
 
   const promise = new Promise((resolve) => {
     timerId = setTimeout(() => {
-      console.log('worker resolves', secs);
+      console.log(`worker ${secs} resolves`);
       resolve(secs);
       timerId = null;
     }, secs * 1000);
@@ -25,6 +27,7 @@ function watchdogTimer(secs) {
 
   const promise = new Promise((resolve, reject) => {
     timerId = setTimeout(() => {
+      console.log('watchdog fires');
       reject();
       timerId = null;
     }, secs * 1000);
@@ -48,18 +51,16 @@ function main() {
   for (let i = 1; i <= 5; i++) {
     const [promise, cancelFn] = cancellableWorker(i);
     const worker = { promise, cancelFn };
-    promise
-      .then((result) => {
-        worker.result = result;
-      })
-      .catch((error) => {
-        worker.error = error;
-      });
+    promise.then((result) => {
+      worker.result = result;
+    });
     workers.push(worker);
   }
 
   // Create cancellable watchdog promise
-  const [watchdogPromise, watchdogCancel] = watchdogTimer(6);
+  const [watchdogPromise, watchdogCancel] = watchdogTimer(
+    WATCHDOG_TIMEOUT_SECS
+  );
 
   // Wait for all worker promises to resolve.
   // If they do, cancel the watchdog timer.

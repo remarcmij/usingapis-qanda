@@ -1,7 +1,9 @@
+const WATCHDOG_TIMEOUT_SECS = 6;
+
 function worker(secs) {
   return new Promise((resolve) => {
     setTimeout(() => {
-      console.log('worker resolves', secs);
+      console.log(`worker ${secs} resolves`);
       resolve(secs);
     }, secs * 1000);
   });
@@ -10,7 +12,8 @@ function worker(secs) {
 function watchdogTimer(secs) {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
-      reject(new Error('timeout'));
+      console.log('watchdog fires');
+      reject();
     }, secs * 1000);
   });
 }
@@ -25,14 +28,14 @@ function main() {
 
   const allWorkers = Promise.all(workerPromises);
 
-  const watchdogPromise = watchdogTimer(3);
+  const watchdogPromise = watchdogTimer(WATCHDOG_TIMEOUT_SECS);
 
   Promise.race([allWorkers, watchdogPromise])
     .then((workerResults) => {
       console.log('workerResults', workerResults);
     })
     .catch((watchdogError) => {
-      console.log('watchdogError', watchdogError.message);
+      console.log('watchdog timeout');
     });
 }
 
