@@ -1,4 +1,4 @@
-const WATCHDOG_TIMEOUT_SECS = 6;
+const WATCHDOG_TIMEOUT_SECS = 3;
 
 function worker(secs) {
   return new Promise((resolve) => {
@@ -9,7 +9,7 @@ function worker(secs) {
   });
 }
 
-function watchdogTimer(secs) {
+function cancellableWatchdogTimer(secs) {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       console.log('watchdog fires');
@@ -28,7 +28,7 @@ function main() {
 
   const allWorkers = Promise.all(workerPromises);
 
-  const watchdogPromise = watchdogTimer(WATCHDOG_TIMEOUT_SECS);
+  const watchdogPromise = cancellableWatchdogTimer(WATCHDOG_TIMEOUT_SECS);
 
   Promise.race([allWorkers, watchdogPromise])
     .then((workerResults) => {

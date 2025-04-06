@@ -22,7 +22,7 @@ function cancellableWorker(secs) {
   return [promise, cancelFn];
 }
 
-function watchdogTimer(secs) {
+function cancellableWatchdogTimer(secs) {
   let timerId = null;
 
   const promise = new Promise((resolve, reject) => {
@@ -58,7 +58,7 @@ function main() {
   }
 
   // Create cancellable watchdog promise
-  const [watchdogPromise, watchdogCancel] = watchdogTimer(
+  const [watchdogPromise, watchdogCancel] = cancellableWatchdogTimer(
     WATCHDOG_TIMEOUT_SECS
   );
 

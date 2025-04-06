@@ -1,4 +1,4 @@
-import { AsyncPromise as Promise } from '../lib/async-promise.js';
+// import { AsyncPromise as Promise } from '../lib/async-promise.js';
 
 const STEP_SIZE_PX = 10;
 const DANCE_TIME_MS = 5000;

@@ -2,10 +2,13 @@ import { beep } from '../lib/beep.js';
 
 function setTimeoutBlocking(callbackFn, time) {
   const endTime = Date.now() + time;
+  let count = 0;
   while (Date.now() < endTime) {
+    count++;
     // do nothing
   }
   callbackFn();
+  console.log('count', count);
 }
 
 let setTimeoutFn;
@@ -32,6 +35,7 @@ function timer(count) {
 }
 
 function startTimer() {
+  console.log('startTimer called');
   if (isRunning) {
     return;
   }
@@ -46,6 +50,7 @@ function startTimer() {
 }
 
 function stopTimer() {
+  console.log('stopTimer called');
   isRunning = false;
 }
 
