@@ -3,10 +3,10 @@ import express from 'express';
 const app = express();
 const port = 3030;
 
-app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  next();
-});
+// app.use((req, res, next) => {
+//   res.setHeader('Access-Control-Allow-Origin', '*');
+//   next();
+// });
 
 app.get('/pokemons', (req, res) => {
   res.sendFile('/pokemons.json', {
