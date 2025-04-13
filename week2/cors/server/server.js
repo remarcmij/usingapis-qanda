@@ -1,4 +1,5 @@
 import express from 'express';
+import morgan from 'morgan';
 
 const app = express();
 const port = 3030;
@@ -7,6 +8,8 @@ const port = 3030;
 //   res.setHeader('Access-Control-Allow-Origin', '*');
 //   next();
 // });
+
+app.use(morgan('tiny'));
 
 app.get('/pokemons', (req, res) => {
   res.sendFile('/pokemons.json', {

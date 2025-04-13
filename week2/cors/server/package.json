@@ -12,11 +12,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.19.1"
+    "express": "^4.19.1",
+    "morgan": "^1.10.0"
   },
   "devDependencies": {
-    "eslint": "^8.57.0",
-    "nodemon": "^3.1.0",
-    "prettier": "^3.2.5"
+    "eslint": "^9.24.0",
+    "nodemon": "^3.1.9",
+    "prettier": "^3.5.3"
   }
 }
